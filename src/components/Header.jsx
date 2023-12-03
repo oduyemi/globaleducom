@@ -15,7 +15,10 @@ export const Header = () => {
         <Box maxWidth="xl" className="py-3 heading">
             <Box className="container" id="topNav">
             <Box className="row justify-content-between">
-                <Box className="col-auto"><a className="navbar-brand" href="/"><img src={require("../assets/images/logos/logo.png")} width="141" alt="logo" /></a></Box>
+                <Box className="col-auto">
+                    <a className="navbar-brand logo" href="/">
+                        <img src={require("../assets/images/logos/logo.png")} width="141" alt="logo" />
+                    </a></Box>
                 <Box className="col-auto order-2 d-none d-sm-block"><a className="nav-link" href="#!"> <i className="fas fa-user text-info me-2"></i></a></Box>
                 <Box className="col-auto d-none d-lg-block">
                     <Box className="d-flex align-items-center">

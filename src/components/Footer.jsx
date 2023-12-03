@@ -11,7 +11,7 @@ export const Footer = () => {
             <Box className="row">
                 <Box className="col-12 col-sm-12 col-lg-6 mb-4 order-0 order-sm-0 my-auto">
                     <a className="text-decoration-none" href="/">
-                        <img src={require("../assets/images/logos/logo-footer.png")} height="75" alt="logo" />
+                        <img src={require("../assets/images/logos/logo.png")} height="100" width="120" alt="logo" />
                     </a>
                     <Typography variant="h5" paragraph sx={{ fontWeight: "light", fontSize: "16px"}} className="text-light">
                         Global Educom is a leading digital provider of academic and professional support services.
