@@ -15,10 +15,10 @@ export const LoginForm = () =>{
               <Typography variant="h4" className="mt-1 mb-3 pb-1 text-warning">Login Form</Typography>
             <Typography variant="h6" sx={{ fontSize: "16px" }} paragraph className="text-muted">Please login to your account</Typography>
             <div className="formgroup mb-3">
-            <input className="form-control rounded-pill text-light" placeholder=" &emsp; Enter email address" name="mail" type="email"/>
+            <input className="form-control text-light" placeholder=" &emsp; Enter email address" name="mail" type="email"/>
             </div>
             <div className="mb-2">
-            <input placeholder="&emsp; Enter password"className="form-control rounded-pill" name="pwd" type="password"/>
+            <input placeholder="&emsp; Enter password"className="form-control" name="pwd" type="password"/>
             </div>
             <div className="text-center pt-1 mb-2 pb-1">
               <Button className="mb-2 w-100">Login</Button>
