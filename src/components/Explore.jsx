@@ -126,7 +126,7 @@ export const Explore = () => {
                         <img className="educom-icon" src={require("../assets/images/icons/design.png")} alt="explore" />
                     </Box>
                     <Box className="flex-grow-1 ms-3">
-                      <Typography variant="h4" className="fs-lg-1 text-primary mb-0">Design &amp; Creative</Typography>
+                      <Typography variant="h4" className="fs-lg-1 text-warning mb-0">Design &amp; Creative</Typography>
                       <a className="stretched-link explore-link" href="#!">37 resource materials</a>
                     </Box>
                   </Box>
