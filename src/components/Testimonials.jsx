@@ -20,7 +20,7 @@ export const Testimonials = () => {
     },
     {
       name: "Sharon Stone",
-      country: "Vancover, Canada",
+      country: "Vancouver, Canada",
       content:
         "Global Educom is a live-saver! The platform made me it possible for me to have a smooth research process for my thesis.",
       image: sharon
