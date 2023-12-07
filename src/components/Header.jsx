@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Box, Typography } from "@mui/material";
 import Icon from "@mdi/react";
 import { mdiAccount } from "@mdi/js";
@@ -10,6 +10,16 @@ import "../css/theme-rtl.css";
 
 
 export const Header = () => {
+    const [isPaused, setIsPaused] = useState(false);
+    const [isClicked, setIsClicked] = useState(false);
+
+    const handleHover = () => {
+        setIsPaused(!isPaused);
+      };
+    
+      const handleClick = () => {
+        setIsClicked(!isClicked);
+      };
     return(
         <Box>
         <Box maxWidth="xl" className="py-3 heading">
@@ -41,15 +51,19 @@ export const Header = () => {
                 <Box className="col-auto">
                     <Box className="d-flex flex-end">
                         <Link to="/login">
-                            <Icon path={mdiAccount}
-                                title="User Profile"
-                                size={1}
-                                horizontal
-                                vertical
-                                rotate={90}
-                                color="orange"
-                                spin
-                            />
+                        <Icon
+                            path={mdiAccount}
+                            title="User Profile"
+                            size={1}
+                            horizontal
+                            vertical
+                            rotate={90}
+                            color={isClicked ? "green" : "orange"}
+                            spin={!isPaused}
+                            onMouseEnter={handleHover}
+                            onMouseLeave={handleHover}
+                            onClick={handleClick}
+                        />
                         </Link>
                     </Box>
                 </Box>

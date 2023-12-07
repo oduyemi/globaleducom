@@ -1,6 +1,6 @@
 import "./vibe/scss/styles.scss"
 
-export default {
+const navigationConfig = {
   top: [
     {
       name: "Home",
@@ -57,3 +57,6 @@ export default {
     },
   ],
 };
+
+
+export default navigationConfig;
