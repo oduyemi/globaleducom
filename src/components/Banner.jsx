@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Box, Typography } from "@mui/material";
+import { Link } from "react-router-dom";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -63,11 +64,11 @@ export const Banner = () => {
             <Box className="card-body border-bottom border-primary p-2 px-md-4 py-md-3 py-xl-4 p-sm-3">
               <Box className="d-md-flex flex-between-center">
                 <p className="mb-0 text-primary fs-2"><strong className="text-warning">100,000+ </strong> people are using our service</p>
-                <a className="text-decoration-none text-warning fw-bold" href="#!" role="button">JOIN NOW
+                <Link to="/register" className="text-decoration-none text-warning fw-bold" role="button">JOIN NOW
                   <svg className="bi bi-arrow-right text-warning ms-2" xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 16 16">
                     <path fillRule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"></path>
                   </svg>
-                </a>
+                </Link>
               </Box>
             </Box>
           </Box>
