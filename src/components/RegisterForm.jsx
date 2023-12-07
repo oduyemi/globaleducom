@@ -12,13 +12,14 @@ export const RegisterForm = () => {
         <Box col="6" sx={{ display: "flex", justifyItem: "center", alignItems: "center", flexDirection: "column" }} className="mb-5">
           <div className="mx-auto my-5">
             <img src={require("../assets/images/gallery/reg.png")}
-                style={{width: "240px"}} alt="logo" />
-            <Typography variant="h6" sx={{ fontSize: "16px" }} paragraph className="text-muted">Global Educom Registration</Typography>
-            <div className="formgroup mb-3">
+                style={{width: "240px"}} alt="reg" />
+                <Typography variant="h4" className="mt-3 pb-1 text-warning">Registration Form</Typography>
+            {/* <Typography variant="h6" sx={{ fontSize: "16px" }} paragraph className="text-muted">Global Educom Registration</Typography> */}
+            <div className="formgroup mb-2">
             <input className="form-control text-light mb-2" placeholder=" &emsp; First name" name="fname" type="text"/>
             <input className="form-control text-light" placeholder=" &emsp; Last name" name="lname" type="text"/>
             </div>
-            <div className="formgroup mb-3">
+            <div className="formgroup mb-2">
             <input className="form-control text-light mb-2" placeholder=" &emsp; Email address" name="mail" type="text"/>
             <input className="form-control text-light" placeholder=" &emsp; Phone number" name="phone" type="number"/>
             </div>
