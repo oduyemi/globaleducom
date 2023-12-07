@@ -33,23 +33,23 @@ export const Banner = () => {
             <Box className="hero-slider-counter text-warning" id="heroSlidercounter">{`0${currentSlide + 1}`.slice(-2)} </Box>
           </Box>
         </Box>
-        <Slider {...settings}>
+        <Slider {...settings} className="mainSlide">
           <Box className="carousel-item">
             <img className="d-block w-100" src={require("../assets/images/gallery/header-slider-1.jpg")} height="447" alt="..." />
             <Box className="carousel-caption d-none d-sm-block">
-              <Typography variant="h1" className="display-4 text-warning text-start fw-light fs-2 fs-md-3 fs-lg-4 fs-xl-5"><strong>Excellent </strong><br />Proposal Feedback</Typography>
+              <Typography variant="h1" className="display-4 text-success text-start fw-light fs-2 fs-md-3 fs-lg-4 fs-xl-5"><strong>Excellent </strong><br />Proposal Feedback</Typography>
             </Box>
           </Box>
           <Box className="carousel-item">
             <img className="d-block w-100" src={require("../assets/images/gallery/header-slider-2.jpg")} height="447" alt="..." />
             <Box className="carousel-caption d-none d-sm-block">
-              <Typography variant="h1" className="display-4 text-warning text-start fw-light"> <strong>100% </strong><br className="d-none d-xxl-block" />Research Success</Typography>
+              <Typography variant="h1" className="display-4 text-warning text-start fw-light fs-2 fs-md-3 fs-lg-4 fs-xl-5"><strong>100% </strong><br />Research Success</Typography>
             </Box>
           </Box>
           <Box className="carousel-item">
             <img className="d-block w-100" src={require("../assets/images/gallery/header-slider-3.jpg")} height="447" alt="..." />
             <Box className="carousel-caption d-none d-sm-block">
-              <Typography variant="h1" className="display-4 text-warning text-start fw-light"> <strong>Full</strong><br className="d-none d-xxl-block" />Customer Support </Typography>
+              <Typography variant="h1" className="display-4 text-success text-start fw-light fs-2 fs-md-3 fs-lg-4 fs-xl-5"><strong>Full </strong><br />Customer Support</Typography>
             </Box>
           </Box>
         </Slider>

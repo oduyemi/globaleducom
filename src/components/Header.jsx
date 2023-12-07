@@ -1,5 +1,5 @@
 import React from "react";
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import Icon from "@mdi/react";
 import { mdiAccount } from "@mdi/js";
 import { Link } from "react-router-dom";
@@ -16,9 +16,16 @@ export const Header = () => {
             <Box className="container" id="topNav">
             <Box className="row justify-content-between">
                 <Box className="col-auto">
-                    <a className="navbar-brand logo" href="/">
-                        <img src={require("../assets/images/logos/logo.png")} width="141" alt="logo" />
-                    </a></Box>
+                <Link to="/" className="text-decoration-none">
+                        <Typography variant="h4" sx={{ fontWeight: "bold"}} className="text-warning">GLOBAL
+                            <span>
+                                <Typography variant="h4" sx={{ fontWeight: "bold"}} className="d-inline text-success">
+                                    &nbsp;EDUCOM
+                                </Typography>
+                            </span>
+                        </Typography>
+                    </Link>
+                </Box>
                 <Box className="col-auto order-2 d-none d-sm-block"><a className="nav-link" href="#!"> <i className="fas fa-user text-info me-2"></i></a></Box>
                 <Box className="col-auto d-none d-lg-block">
                     <Box className="d-flex align-items-center">

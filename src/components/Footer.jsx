@@ -2,17 +2,24 @@ import { Box, Typography } from "@mui/material";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../css/theme.css";
 import "../css/theme-rtl.css";
+import { Link } from "react-router-dom";
 
 
 export const Footer = () => {
     return(
-        <Box maxWidth="xl" sx={{ backgroundColor: "#1D3461"}}>
+        <Box maxWidth="xl" className="bg-dark">
             <Box className="container">
             <Box className="row">
                 <Box className="col-12 col-sm-12 col-lg-6 mb-4 order-0 order-sm-0 my-auto">
-                    <a className="text-decoration-none" href="/">
-                        <img src={require("../assets/images/logos/logo.png")} height="100" width="120" alt="logo" />
-                    </a>
+                    <Link to="/" className="text-decoration-none">
+                        <Typography variant="h4" sx={{ fontWeight: "bold"}} className="my-5 text-light">GLOBAL
+                            <span>
+                                <Typography variant="h4" sx={{ fontWeight: "bold"}} className="d-inline text-success">
+                                    &nbsp;EDUCOM
+                                </Typography>
+                            </span>
+                        </Typography>
+                    </Link>
                     <Typography variant="h5" paragraph sx={{ fontWeight: "light", fontSize: "16px"}} className="text-light">
                         Global Educom is a leading digital provider of academic and professional support services.
                         <br className="d-none d-sm-block" />We provide postgraduates with all the resources and 

@@ -45,6 +45,10 @@ body{
   right: -16px;
 }
 
+.newsletter{
+  font-size: larger;
+}
+
 .card{
   background-color:#FA9F42;
 }
@@ -52,6 +56,17 @@ body{
 .badge{
   padding: 11.1px 21px;
 }
+
+
+.mainNav li{
+  list-style: none;
+}
+.navLnks{
+  text-decoration: none !important;
+  list-style: none !important;
+}
+
+
 
 .quest{
   background-image: url(../src/assets/images/gallery/quotation.png) !important;
