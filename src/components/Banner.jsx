@@ -19,7 +19,7 @@ export const Banner = () => {
         speed: 500,
         slidesToShow: 1,
         slidesToScroll: 1,
-        behtmlForeChange: (oldIndex, newIndex) => setCurrentSlide(newIndex)
+        beforeChange: (oldIndex, newIndex) => setCurrentSlide(newIndex)
     };
 
   return (
