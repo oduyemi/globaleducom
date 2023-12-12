@@ -63,31 +63,60 @@ export const RegisterForm = () => {
                 <Typography variant="h4" className="mt-3 pb-1 text-warning">Registration Form</Typography>
             {/* <Typography variant="h6" sx={{ fontSize: "16px" }} paragraph className="text-muted">Global Educom Registration</Typography> */}
             <div className="formgroup mb-2">
-            <input className="form-control text-light mb-2" placeholder=" &emsp; First name" name="fname" type="text"/>
-            <input className="form-control text-light" placeholder=" &emsp; Last name" name="lname" type="text"/>
-            </div>
-            <div className="formgroup mb-2">
-            <input className="form-control text-light mb-2" placeholder=" &emsp; Email address" name="mail" type="text"/>
-            <input className="form-control text-light" placeholder=" &emsp; Phone number" name="phone" type="number"/>
-            </div>
-            <div className="mb-2">
-              <input
-                className="form-control mb-2"
-                placeholder=" &emsp; Create password"
-                name="password"
-                type="password"
-                value={formData.password}
-                onChange={handleChange}
-              />
-              <input
-                className="form-control"
-                placeholder=" &emsp; Confirm password"
-                name="confirmPassword"
-                type="password"
-                value={formData.confirmPassword}
-                onChange={handleChange}
-              />
-            </div>
+          <input
+            className="form-control text-light mb-2"
+            placeholder=" &emsp; First name"
+            name="fname"
+            type="text"
+            value={formData.fname} // Use the state value
+            onChange={handleChange}
+          />
+          <input
+            className="form-control text-light"
+            placeholder=" &emsp; Last name"
+            name="lname"
+            type="text"
+            value={formData.lname} // Use the state value
+            onChange={handleChange}
+          />
+        </div>
+        <div className="formgroup mb-2">
+          <input
+            className="form-control text-light mb-2"
+            placeholder=" &emsp; Email address"
+            name="email"
+            type="text"
+            value={formData.email} // Use the state value
+            onChange={handleChange}
+          />
+          <input
+            className="form-control text-light"
+            placeholder=" &emsp; Phone number"
+            name="phone"
+            type="number"
+            value={formData.phone} // Use the state value
+            onChange={handleChange}
+          />
+        </div>
+        <div className="mb-2">
+          <input
+            className="form-control mb-2"
+            placeholder=" &emsp; Create password"
+            name="password"
+            type="password"
+            value={formData.password} // Use the state value
+            onChange={handleChange}
+          />
+          <input
+            className="form-control"
+            placeholder=" &emsp; Confirm password"
+            name="confirmPassword"
+            type="password"
+            value={formData.confirmPassword} // Use the state value
+            onChange={handleChange}
+          />
+        </div>
+
             <div className="text-center pt-1 mb-2 pb-1">
               <Button className="mb-2 w-100" onClick={handleRegister} disabled={loading}>
                 {loading ? 'Registering...' : 'Register'}

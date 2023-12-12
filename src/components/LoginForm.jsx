@@ -1,32 +1,43 @@
-import React from "react";
-import { Box, Typography } from "@mui/material"
+import React, { useState } from "react";
+import { Box, Typography } from "@mui/material";
 import Button from "./elements/Button";
 import { Link } from "react-router-dom";
 import "../App.css";
 import axios from "axios";
 
-export const LoginForm = () =>{
+export const LoginForm = () => {
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
   const handleLogin = async () => {
     try {
-      const response = await axios.post('https://globaleducomm.com/api/send/login', {
-        email: '',
-        password: '',
-      });
-  
+      const response = await axios.post('https://globaleducomm.com/api/send/login', formData);
+
       const { message, flashMessage, flashType } = response.data;
-  
+
       if (flashType === 'success') {
         console.log(flashMessage);
       } else if (flashType === 'error') {
         console.error(flashMessage);
       }
-  
+
       console.log(message);
 
     } catch (error) {
       console.error('Login failed:', error.response.data);
     }
   };
+
   return (
     <Box container maxWidth="xl" className="mb-2 mx-auto gradient-form">
       <Box className="row">
@@ -37,10 +48,24 @@ export const LoginForm = () =>{
               <Typography variant="h4" className="mt-1 mb-3 pb-1 text-warning">Login Form</Typography>
             <Typography variant="h6" sx={{ fontSize: "16px" }} paragraph className="text-muted">Please login to your account</Typography>
             <div className="formgroup mb-3">
-            <input className="form-control text-light" placeholder=" &emsp; Enter email address" name="mail" type="email"/>
+              <input
+                className="form-control text-light"
+                placeholder=" &emsp; Enter email address"
+                name="email"
+                type="email"
+                value={formData.email}
+                onChange={handleChange}
+              />
             </div>
             <div className="mb-2">
-            <input placeholder="&emsp; Enter password"className="form-control" name="pwd" type="password"/>
+              <input
+                placeholder="&emsp; Enter password"
+                className="form-control"
+                name="password"
+                type="password"
+                value={formData.password}
+                onChange={handleChange}
+              />
             </div>
             <div className="text-center pt-1 mb-2 pb-1">
               <Button onClick={handleLogin} className="mb-2 w-100">Login</Button>
@@ -48,17 +73,13 @@ export const LoginForm = () =>{
             </div>
 
             <div className="d-flex flex-row align-items-center justify-content-center pb-4 mb-4">
-              <Typography variant="h6" sx={{ fontWeight: "light", fontSize: "12px" }} paragraph className="mb-0 ">Don"t have an account?
-                <span><Link to="/register"><Typography variant="h6"sx={{ fontWeight: "light", fontSize: "10px" }} className="text-success d-inline" paragraph> Click Here</Typography></Link></span>
+              <Typography variant="h6" sx={{ fontWeight: "light", fontSize: "12px" }} paragraph className="mb-0 ">Don't have an account?
+                <span><Link to="/register"><Typography variant="h6" sx={{ fontWeight: "light", fontSize: "10px" }} className="text-success d-inline" paragraph> Click Here</Typography></Link></span>
               </Typography>
             </div>
-
           </div>
-
         </Box>
       </Box>
-
     </Box>
   );
-}
-
+};
