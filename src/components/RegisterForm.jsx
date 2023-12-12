@@ -17,6 +17,7 @@ export const RegisterForm = () => {
     confirmPassword: "",
   });
   const [flashMessage, setFlashMessage] = useState(null);
+  const [formSubmitted, setFormSubmitted] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -49,9 +50,11 @@ export const RegisterForm = () => {
 
     return(
       <Box container maxWidth="xl" className="mb-2 mx-auto gradient-form">
-        <div className={`alert ${flashMessage?.type === 'success' ? 'alert-success' : 'alert-danger'}`}>
-        {flashMessage?.message}
-      </div>
+        {formSubmitted && (
+          <div className={`alert ${flashMessage?.type === 'success' ? 'alert-success' : 'alert-danger'}`}>
+            {flashMessage?.message}
+          </div>
+        )}
       <Box className="row">
         <Box col="6" sx={{ display: "flex", justifyItem: "center", alignItems: "center", flexDirection: "column" }} className="mb-5">
           <div className="mx-auto my-5">
