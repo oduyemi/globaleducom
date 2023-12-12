@@ -56,11 +56,6 @@ export const Profile = () => {
       setLoading(false);
     }
   };
-  
-  const getUserIdFromSession = () => {
-    const session = { user: { user_id: '123' } };
-    return session.user.user_id;
-  };
 
   const toggleItemExpansion = (index) => {
     setExpandedItems((prevItems) =>
@@ -70,6 +65,10 @@ export const Profile = () => {
     );
   };
 
+  const getUserIdFromSession = () => {
+    const userIdCookie = document.cookie.split(';').find(cookie => cookie.trim().startsWith('userId='));
+    return userIdCookie ? userIdCookie.split('=')[1] : null;
+  };
     return (
       <Container fluid>
         <Row>

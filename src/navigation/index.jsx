@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import { Header } from "../components/Header";
+import { getCookie } from '../CookieUtils';
 import Home from "../pages/Home";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
@@ -22,6 +23,12 @@ const DashboardLayout = ({ children }) => (
 );
 
 const Navigation = () => {
+  useEffect(() => {
+    const userId = getCookie('userId');
+    if (userId) {
+      console.log('User is logged in. UserId:', userId);
+    }
+  }, []);
   return (
     <Routes>
       <Route
