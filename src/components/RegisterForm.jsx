@@ -31,11 +31,11 @@ export const RegisterForm = () => {
     try {
       setLoading(true);
       const response = await axios.post('https://globaleducomm.com/api/send/register', formData);
+      console.log(response.data); // Log the response
       setFlashMessage({
         type: 'success',
         message: response.data.message,
       });
-     
       window.location.href = '/login';
     } catch (error) {
       console.error('Error during registration:', error);

@@ -8,7 +8,7 @@ import axios from "axios";
 export const LoginForm = () =>{
   const handleLogin = async () => {
     try {
-      const response = await axios.post('https://globaleducomm.com/api/login', {
+      const response = await axios.post('https://globaleducomm.com/api/send/login', {
         email: '',
         password: '',
       });
