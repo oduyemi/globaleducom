@@ -68,7 +68,7 @@ export const RegisterForm = () => {
             placeholder=" &emsp; First name"
             name="fname"
             type="text"
-            value={formData.fname} // Use the state value
+            value={formData.fname} 
             onChange={handleChange}
           />
           <input
@@ -76,7 +76,7 @@ export const RegisterForm = () => {
             placeholder=" &emsp; Last name"
             name="lname"
             type="text"
-            value={formData.lname} // Use the state value
+            value={formData.lname}
             onChange={handleChange}
           />
         </div>
@@ -86,7 +86,7 @@ export const RegisterForm = () => {
             placeholder=" &emsp; Email address"
             name="email"
             type="text"
-            value={formData.email} // Use the state value
+            value={formData.email} 
             onChange={handleChange}
           />
           <input
@@ -94,7 +94,7 @@ export const RegisterForm = () => {
             placeholder=" &emsp; Phone number"
             name="phone"
             type="number"
-            value={formData.phone} // Use the state value
+            value={formData.phone} 
             onChange={handleChange}
           />
         </div>
@@ -104,7 +104,7 @@ export const RegisterForm = () => {
             placeholder=" &emsp; Create password"
             name="password"
             type="password"
-            value={formData.password} // Use the state value
+            value={formData.password} 
             onChange={handleChange}
           />
           <input
@@ -112,7 +112,7 @@ export const RegisterForm = () => {
             placeholder=" &emsp; Confirm password"
             name="confirmPassword"
             type="password"
-            value={formData.confirmPassword} // Use the state value
+            value={formData.confirmPassword} 
             onChange={handleChange}
           />
         </div>

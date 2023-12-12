@@ -21,20 +21,20 @@ export const LoginForm = () => {
 
   const handleLogin = async () => {
     try {
-      const response = await axios.post('https://globaleducomm.com/api/send/login', formData);
-
+      const response = await axios.post("https://globaleducomm.com/api/send/login", formData);
+  
       const { message, flashMessage, flashType } = response.data;
-
-      if (flashType === 'success') {
+  
+      if (flashType === "success") {
         console.log(flashMessage);
-      } else if (flashType === 'error') {
+      } else if (flashType === "error") {
         console.error(flashMessage);
       }
-
+  
       console.log(message);
-      window.location.href = '/dashboard';
+      window.location.href = "/dashboard"; // Redirect to dashboard on successful login
     } catch (error) {
-      console.error('Login failed:', error.response.data);
+      console.error("Login failed:", error.response.data);
     }
   };
 
@@ -73,7 +73,7 @@ export const LoginForm = () => {
             </div>
 
             <div className="d-flex flex-row align-items-center justify-content-center pb-4 mb-4">
-              <Typography variant="h6" sx={{ fontWeight: "light", fontSize: "12px" }} paragraph className="mb-0 ">Don't have an account?
+              <Typography variant="h6" sx={{ fontWeight: "light", fontSize: "12px" }} paragraph className="mb-0 ">Don"t have an account?
                 <span><Link to="/register"><Typography variant="h6" sx={{ fontWeight: "light", fontSize: "10px" }} className="text-success d-inline" paragraph> Click Here</Typography></Link></span>
               </Typography>
             </div>
