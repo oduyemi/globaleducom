@@ -20,7 +20,7 @@ export const Profile = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await axios.get('https://globaleducomm.com/api/user');
+        const response = await axios.get('https://globaleducomm.com/api/users/user/:id');
         const { user_fname, user_lname, user_email, user_phone } = response.data;
         setFormData({
           fname: user_fname,
