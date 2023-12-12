@@ -12,8 +12,17 @@ export const LoginForm = () =>{
         email: '',
         password: '',
       });
+  
+      const { message, flashMessage, flashType } = response.data;
+  
+      if (flashType === 'success') {
+        console.log(flashMessage);
+      } else if (flashType === 'error') {
+        console.error(flashMessage);
+      }
+  
+      console.log(message);
 
-      console.log(response.data);
     } catch (error) {
       console.error('Login failed:', error.response.data);
     }
