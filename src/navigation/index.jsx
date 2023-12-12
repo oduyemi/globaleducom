@@ -34,7 +34,7 @@ const Navigation = () => {
         }
       />
       <Route path="/login" element={<DefaultLayout><Login /></DefaultLayout>} />
-      <Route path="/register" render={(props) => (<RegisterForm {...props} history={props.history} element={<DefaultLayout><Register /></DefaultLayout>} />)} />
+      <Route path="/register" element={<DefaultLayout><Register /></DefaultLayout>} />
       <Route path="/dashboard" element={<DashboardLayout><DashboardPage /></DashboardLayout>} />
     </Routes>
   );

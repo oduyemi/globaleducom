@@ -3,6 +3,7 @@ import { Footer } from "../../components/Footer";
 import { FooterBottom } from "../../components/FooterBottom";
 
 
+
 const Register = () => {
     return(
         <>

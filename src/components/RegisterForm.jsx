@@ -35,7 +35,7 @@ export const RegisterForm = () => {
         message: response.data.message,
       });
      
-      history.push('/login');
+      window.location.href = '/login';
     } catch (error) {
       console.error('Error during registration:', error);
       setFlashMessage({
