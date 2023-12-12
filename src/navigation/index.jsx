@@ -5,6 +5,7 @@ import Home from "../pages/Home";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import DashboardPage from "../pages/DashboardPage";
+import ProfilePage from "../pages/ProfilePage";
 
 const DefaultLayout = ({ children }) => (
   <>
@@ -36,6 +37,7 @@ const Navigation = () => {
       <Route path="/login" element={<DefaultLayout><Login /></DefaultLayout>} />
       <Route path="/register" element={<DefaultLayout><Register /></DefaultLayout>} />
       <Route path="/dashboard" element={<DashboardLayout><DashboardPage /></DashboardLayout>} />
+      <Route path="/profile" element={<DashboardLayout><ProfilePage /></DashboardLayout>} />
     </Routes>
   );
 };

@@ -70,7 +70,7 @@ export const LoginForm = () => {
             </div>
             <div className="text-center pt-1 mb-2 pb-1">
               <Button onClick={handleLogin} className="mb-2 w-100" disabled={loading}>
-                {loading ? "Login in..." : "Login"}
+                {loading ? "Hang on..." : "Login"}
               </Button>
               <Link className="text-muted" to="#!">Forgot password?</Link>
             </div>

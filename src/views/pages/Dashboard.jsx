@@ -1,17 +1,28 @@
 import React, { Component } from "react";
 import { Card, CardBody, Container, Row, Col } from "reactstrap";
 import navigationConfig from "../../_nav"; 
-import "../../vibe/scss/styles.scss"
+import "../../vibe/scss/styles.scss";
 import { Link } from "react-router-dom";
-import Button from "../../components/elements/Button"
-
+import Button from "../../components/elements/Button";
+import axios from "axios";
 
 class Dashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
       expandedItems: [], // Track expanded menu items
+      firstName: "", // State to hold user's first name
     };
+  }
+
+  async componentDidMount() {
+    try {
+      const response = await axios.get('https://globaleducomm.com/api/user');
+      const { user_fname } = response.data;
+      this.setState({ firstName: user_fname });
+    } catch (error) {
+      console.error('Error fetching user data:', error);
+    }
   }
 
   // Function to handle toggling the expansion of a menu item
@@ -34,8 +45,7 @@ class Dashboard extends Component {
       padding: "50px 0 70px",
     };
 
-    const { expandedItems } = this.state;
-
+    const { expandedItems, firstName } = this.state;
 
     return (
       <Container fluid>
@@ -77,7 +87,7 @@ class Dashboard extends Component {
             <Row>
               <Col md={6}>
                 <div className="home-hero" style={heroStyles}>
-                  <h1 className="text-light">Welcome,  David</h1>
+                  <h1 className="text-light">Welcome, {firstName}</h1>
                   <p className="text-dark">
                     Discover the resources that will help speed up
                     your next reasearch project.

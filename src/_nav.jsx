@@ -13,16 +13,13 @@ const navigationConfig = {
       children: [
         {
           name: "View Account",
-          url: "/elements/buttons",
+          url: "/profile",
         },
-        {
-          name: "Edit Account",
-          url: "/elements/grid",
-        },
-        {
-          name: "Delete Account",
-          url: "/elements/alerts",
-        },
+
+        // {
+        //   name: "Delete Account",
+        //   url: "/elements/alerts",
+        // },
       ],
     },
     {
