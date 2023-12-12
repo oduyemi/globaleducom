@@ -28,7 +28,7 @@ export const RegisterForm = () => {
   const handleRegister = async () => {
     try {
       setLoading(true);
-      const response = await axios.post('https://globaleducomm.com/docs/register', formData);
+      const response = await axios.post('https://globaleducomm.com/docs/register', formData, { withCredentials: true });
       console.log(response.data);
     } catch (error) {
       console.error('Error during registration:', error);
