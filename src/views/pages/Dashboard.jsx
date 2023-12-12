@@ -10,14 +10,14 @@ class Dashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      expandedItems: [], // Track expanded menu items
-      firstName: "", // State to hold user's first name
+      expandedItems: [], 
+      firstName: "", 
     };
   }
 
   async componentDidMount() {
     try {
-      const response = await axios.get('https://globaleducomm.com/api/user');
+      const response = await axios.get('https://globaleducomm.com/api/users/user/:id');
       const { user_fname } = response.data;
       this.setState({ firstName: user_fname });
     } catch (error) {
@@ -25,13 +25,11 @@ class Dashboard extends Component {
     }
   }
 
-  // Function to handle toggling the expansion of a menu item
   toggleItemExpansion = (index) => {
     const { expandedItems } = this.state;
     const newExpandedItems = [...expandedItems];
 
-    // Toggle the expansion state for the clicked item
-    if (newExpandedItems.includes(index)) {
+       if (newExpandedItems.includes(index)) {
       newExpandedItems.splice(newExpandedItems.indexOf(index), 1);
     } else {
       newExpandedItems.push(index);
@@ -154,14 +152,7 @@ class Dashboard extends Component {
                             <img src={require("../../assets/images/gallery/lang.jpg")} width="20%" alt="resources" />&emsp;
                           <Link to="#!" className="text-dark">Analyzing language attrition among most English speakers</Link>
                           </span>
-                        </li>
-                        {/* <li className="navLnks mb-3">
-                          <span>
-                            <img src={require("../../assets/images/gallery/pm.jpg")} width="20%" alt="resources" />&emsp;
-                          <Link to="#!" className="text-dark">Stakeholder Approach to Successful Adoption of Projects</Link>
-                          </span>
-                        </li> */}
-                        
+                        </li>                        
                       </ul>
                     </div>
                   </CardBody>
@@ -180,18 +171,6 @@ class Dashboard extends Component {
                   </CardBody>
                 </Card>
               </Col>
-              {/* <Col md={6}>
-                <Card>
-                  <CardBody className="display-flex">
-                    <div className="m-l">
-                      <h2 className="h4">Responsive</h2>
-                      <p className="text-muted">
-                        Designed for screens of all sizes.
-                      </p>
-                    </div>
-                  </CardBody>
-                </Card>
-              </Col> */}
             </Row>
           </Col>
         </Row>
