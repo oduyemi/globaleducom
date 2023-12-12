@@ -1,11 +1,42 @@
-import React from "react";
+import React, { useState } from "react";
 import { Box, Typography } from "@mui/material"
 import Button from "./elements/Button";
 import { Link } from "react-router-dom";
+import axios from 'axios';
 import "../App.css"
 
 
 export const RegisterForm = () => {
+  const [loading, setLoading] = useState(false);
+  const [formData, setFormData] = useState({
+    fname: "",
+    lname: "",
+    email: "",
+    phone: "",
+    password: "",
+    confirmPassword: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleRegister = async () => {
+    try {
+      setLoading(true);
+      const response = await axios.post('https://globaleducomm.com/docs/register', formData);
+      console.log(response.data);
+    } catch (error) {
+      console.error('Error during registration:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
     return(
       <Box container maxWidth="xl" className="mb-2 mx-auto gradient-form">
       <Box className="row">
@@ -24,11 +55,27 @@ export const RegisterForm = () => {
             <input className="form-control text-light" placeholder=" &emsp; Phone number" name="phone" type="number"/>
             </div>
             <div className="mb-2">
-            <input placeholder="&emsp; Create password"className="form-control mb-2" name="pwd" type="password"/>
-            <input placeholder="&emsp; Confirm password"className="form-control " name="cpwd" type="password"/>
+              <input
+                className="form-control mb-2"
+                placeholder=" &emsp; Create password"
+                name="password"
+                type="password"
+                value={formData.password}
+                onChange={handleChange}
+              />
+              <input
+                className="form-control"
+                placeholder=" &emsp; Confirm password"
+                name="confirmPassword"
+                type="password"
+                value={formData.confirmPassword}
+                onChange={handleChange}
+              />
             </div>
             <div className="text-center pt-1 mb-2 pb-1">
-              <Button className="mb-2 w-100">Register</Button>
+              <Button className="mb-2 w-100" onClick={handleRegister} disabled={loading}>
+                {loading ? 'Registering...' : 'Register'}
+              </Button>
             </div>
 
             <div className="d-flex flex-row align-items-center justify-content-center pb-4 mb-4">

@@ -2,9 +2,22 @@ import React from "react";
 import { Box, Typography } from "@mui/material"
 import Button from "./elements/Button";
 import { Link } from "react-router-dom";
-import "../App.css"
+import "../App.css";
+import axios from "axios";
 
 export const LoginForm = () =>{
+  const handleLogin = async () => {
+    try {
+      const response = await axios.post('https://globaleducomm.com/docs/login', {
+        email: '',
+        password: '',
+      });
+
+      console.log(response.data);
+    } catch (error) {
+      console.error('Login failed:', error.response.data);
+    }
+  };
   return (
     <Box container maxWidth="xl" className="mb-2 mx-auto gradient-form">
       <Box className="row">
@@ -21,7 +34,7 @@ export const LoginForm = () =>{
             <input placeholder="&emsp; Enter password"className="form-control" name="pwd" type="password"/>
             </div>
             <div className="text-center pt-1 mb-2 pb-1">
-              <Button className="mb-2 w-100">Login</Button>
+              <Button onClick={handleLogin} className="mb-2 w-100">Login</Button>
               <Link className="text-muted" to="#!">Forgot password?</Link>
             </div>
 
