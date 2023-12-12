@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Box, Typography } from "@mui/material"
 import Button from "./elements/Button";
 import { Link } from "react-router-dom";
-import axios from 'axios';
+import axios from "axios";
 import "../App.css"
 
 
@@ -30,18 +30,18 @@ export const RegisterForm = () => {
   const handleRegister = async () => {
     try {
       setLoading(true);
-      const response = await axios.post('https://globaleducomm.com/api/send/register', formData);
+      const response = await axios.post("https://globaleducomm.com/api/send/register", formData);
       console.log(response.data); 
       setFlashMessage({
-        type: 'success',
+        type: "success",
         message: response.data.message,
       });
-      window.location.href = '/login';
+      window.location.href = "/login";
     } catch (error) {
-      console.error('Error during registration:', error);
+      console.error("Error during registration:", error);
       setFlashMessage({
-        type: 'error',
-        message: 'Error during registration. Please try again.',
+        type: "error",
+        message: "Error during registration. Please try again.",
       });
     } finally {
       setLoading(false);
@@ -51,7 +51,7 @@ export const RegisterForm = () => {
     return(
       <Box container maxWidth="xl" className="mb-2 mx-auto gradient-form">
         {formSubmitted && (
-          <div className={`alert ${flashMessage?.type === 'success' ? 'alert-success' : 'alert-danger'}`}>
+          <div className={`alert ${flashMessage?.type === "success" ? "alert-success" : "alert-danger"}`}>
             {flashMessage?.message}
           </div>
         )}
@@ -119,7 +119,7 @@ export const RegisterForm = () => {
 
             <div className="text-center pt-1 mb-2 pb-1">
               <Button className="mb-2 w-100" onClick={handleRegister} disabled={loading}>
-                {loading ? 'Registering...' : 'Register'}
+                {loading ? "Registering..." : "Register"}
               </Button>
             </div>
 
