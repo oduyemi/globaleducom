@@ -16,6 +16,7 @@ export const RegisterForm = () => {
     password: "",
     confirmPassword: "",
   });
+  const [flashMessage, setFlashMessage] = useState(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -29,9 +30,18 @@ export const RegisterForm = () => {
     try {
       setLoading(true);
       const response = await axios.post('https://globaleducomm.com/api/send/register', formData);
-      console.log(response.data);
+      setFlashMessage({
+        type: 'success',
+        message: response.data.message,
+      });
+     
+      history.push('/login');
     } catch (error) {
       console.error('Error during registration:', error);
+      setFlashMessage({
+        type: 'error',
+        message: 'Error during registration. Please try again.',
+      });
     } finally {
       setLoading(false);
     }
@@ -39,6 +49,9 @@ export const RegisterForm = () => {
 
     return(
       <Box container maxWidth="xl" className="mb-2 mx-auto gradient-form">
+        <div className={`alert ${flashMessage?.type === 'success' ? 'alert-success' : 'alert-danger'}`}>
+        {flashMessage?.message}
+      </div>
       <Box className="row">
         <Box col="6" sx={{ display: "flex", justifyItem: "center", alignItems: "center", flexDirection: "column" }} className="mb-5">
           <div className="mx-auto my-5">
