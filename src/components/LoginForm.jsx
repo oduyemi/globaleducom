@@ -32,7 +32,7 @@ export const LoginForm = () => {
       }
 
       console.log(message);
-
+      window.location.href = '/dashboard';
     } catch (error) {
       console.error('Login failed:', error.response.data);
     }

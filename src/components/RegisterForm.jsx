@@ -31,7 +31,7 @@ export const RegisterForm = () => {
     try {
       setLoading(true);
       const response = await axios.post('https://globaleducomm.com/api/send/register', formData);
-      console.log(response.data); // Log the response
+      console.log(response.data); 
       setFlashMessage({
         type: 'success',
         message: response.data.message,
