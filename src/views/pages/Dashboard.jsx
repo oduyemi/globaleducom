@@ -23,24 +23,15 @@ export const Dashboard = () => {
     }
   };
 
-  const { data: userData } = useQuery('user', fetchUserData);
+  const { data: userData } = useQuery(['user', userData?.user_id], fetchUserData);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const userId = userData?.user_id;
-        if (userId) {
-          const response = await axios.get(`https://globaleducomm.com/api/users/user/${userId}`);
-          const { user_fname } = response.data.data[0];
-          setFirstName(user_fname);
-        }
-      } catch (error) {
-        console.error('Error fetching user data:', error);
-      }
-    };
-
-    fetchData();
+    if (userData && userData.data && userData.data.length > 0) {
+      const { user_fname } = userData.data[0]; 
+      setFirstName(user_fname);
+    }
   }, [userData]);
+  
 
   const toggleItemExpansion = (index) => {
     setExpandedItems((prevExpandedItems) => {

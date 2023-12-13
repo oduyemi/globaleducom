@@ -20,7 +20,7 @@ export const Profile = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const userId = this.props.user.user_id;
+        const userId = getUserIdFromSession();
         const response = await axios.get(`https://globaleducomm.com/api/users/user/${userId}`);
         const { user_fname, user_lname, user_email, user_phone } = response.data;
         setFormData({
@@ -33,7 +33,7 @@ export const Profile = () => {
         console.error('Error fetching user data:', error);
       }
     };
-
+  
     fetchUserData();
   }, []);
 
