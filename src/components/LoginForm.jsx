@@ -9,6 +9,7 @@ import { useQueryClient } from 'react-query';
 
 
 
+
 export const LoginForm = () => {
   const queryClient = useQueryClient();
   const [loading, setLoading] = useState(false);
@@ -31,24 +32,26 @@ export const LoginForm = () => {
     try {
       const response = await axios.post("https://globaleducomm.com/api/send/login", formData);
       const userData = await loginUser();
+      
       queryClient.setQueryData('user', userData);
       const { message, flashMessage, flashType } = response.data;
-  
+
       if (flashType === "success") {
         setFlashMessage(flashMessage);
+        console.log('Flash Message:', flashMessage);
       } else if (flashType === "error") {
         setErrorFlashMessage(flashMessage);
-      }
-  
+        console.log('Error Flash Message:', flashMessage);
+      }      
       console.log(message);
       window.location.href = "/dashboard";
-  
     } catch (error) {
       console.error("Login failed", error.response.data);
     } finally {
       setLoading(false);
     }
   };
+
   
   return (
     <Box container maxWidth="xl" className="mb-2 mx-auto gradient-form">
@@ -59,10 +62,11 @@ export const LoginForm = () => {
                 style={{width: "240px"}} alt="logo" />
               <Typography variant="h4" className="mt-1 mb-3 pb-1 text-warning">Login Form</Typography>
             <Typography variant="h6" sx={{ fontSize: "16px" }} paragraph className="text-muted">Please login to your account</Typography>
-            <div>
-              {flashMessage && <div className="success-message">{flashMessage}</div>}
-              {errorFlashMessage && <div className="error-message">{errorFlashMessage}</div>}
-            </div>
+              <div>
+                {flashMessage && <div className="success-message">{flashMessage}</div>}
+                {errorFlashMessage && <div className="error-message">{errorFlashMessage}
+              </div>}
+          </div>
             <div className="formgroup mb-3">
               <input
                 className="form-control text-light"
@@ -84,7 +88,7 @@ export const LoginForm = () => {
               />
             </div>
             <div className="text-center pt-1 mb-2 pb-1">
-              <Button onClick={handleLogin} className="mb-2 w-100" disabled={loading}>
+              <Button onClick={handleLogin} className="mb-2 w-100" disable={loading}>
                 {loading ? "Hang on..." : "Login"}
               </Button>
               <Link className="text-muted" to="#!">Forgot password?</Link>
