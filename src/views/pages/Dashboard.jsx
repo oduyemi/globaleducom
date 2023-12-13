@@ -9,14 +9,14 @@ import { useQuery, useQueryClient } from 'react-query';
 
 export const Dashboard = () => {
   const [expandedItems, setExpandedItems] = useState([]);
-  const [firstName, setFirstName] = useState("");
-  const queryClient = useQueryClient();
-  const { data: userData } = useQuery('user', fetchUserData);
+const [firstName, setFirstName] = useState("");
+const queryClient = useQueryClient();
+const { data: userData } = useQuery('user', fetchUserData);
 
 useEffect(() => {
   const fetchData = async () => {
     try {
-      const userId = userData?.user_id; // This line
+      const userId = userData?.user_id;
       if (userId) {
         const response = await axios.get(`https://globaleducomm.com/api/users/user/${userId}`);
         const { user_fname } = response.data.data[0];
@@ -30,34 +30,31 @@ useEffect(() => {
   fetchData();
 }, [userData]);
 
-    fetchData();
-  }, [userData]);
+const fetchUserData = async (userId) => {
+  try {
+    const response = await fetch(`https://globaleducomm.com/api/users/user/${userId}`);
+    const userData = await response.json();
 
-  const fetchUserData = async (userId) => {
-    try {
-      const response = await fetch(`https://globaleducomm.com/api/users/user/${userId}`);
-      const userData = await response.json();
-  
-      return userData;
-    } catch (error) {
-      console.error('Error fetching user data:', error);
-      throw new Error('Failed to fetch user data');
+    return userData;
+  } catch (error) {
+    console.error('Error fetching user data:', error);
+    throw new Error('Failed to fetch user data');
+  }
+};
+
+const toggleItemExpansion = (index) => {
+  setExpandedItems((prevExpandedItems) => {
+    if (prevExpandedItems.includes(index)) {
+      return prevExpandedItems.filter((item) => item !== index);
+    } else {
+      return [...prevExpandedItems, index];
     }
-  };
+  });
+};
 
-  const toggleItemExpansion = (index) => {
-    setExpandedItems((prevExpandedItems) => {
-      if (prevExpandedItems.includes(index)) {
-        return prevExpandedItems.filter((item) => item !== index);
-      } else {
-        return [...prevExpandedItems, index];
-      }
-    });
-  };
-
-  const heroStyles = {
-    padding: "50px 0 70px",
-  };
+const heroStyles = {
+  padding: "50px 0 70px",
+};
 
   return (
     <Container fluid>
