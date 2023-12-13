@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const loginUser = async () => {
+const loginUser = async (userId) => {
   try {
     const response = await axios.get(`https://globaleducomm.com/api/fetch/users/user/${userId}`); 
     return response.data;
