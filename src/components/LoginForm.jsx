@@ -30,6 +30,7 @@ export const LoginForm = () => {
 
   const handleLogin = async () => {
     try {
+      setLoading(true);
       const response = await axios.post("https://globaleducomm.com/api/send/login", formData);
       const userData = await loginUser(response.data.userId);
       
@@ -39,18 +40,21 @@ export const LoginForm = () => {
       if (flashType === "success") {
         setFlashMessage(flashMessage);
         console.log('Flash Message:', flashMessage);
+       
+        window.location.href = "/dashboard";
       } else if (flashType === "error") {
         setErrorFlashMessage(flashMessage);
         console.log('Error Flash Message:', flashMessage);
       }      
       console.log(message);
-      window.location.href = "/dashboard";
     } catch (error) {
-      console.error("Login failed", error.response.data);
+      console.error("Login failed", error.response?.data || error.message);
+
+      setErrorFlashMessage("Login failed. Please try again.");
     } finally {
       setLoading(false);
     }
-  };
+  }
 
   
   return (
