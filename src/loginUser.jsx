@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const loginUser = async (userId) => {
-  const userIdInt = number(userId);
+  const userIdInt = parseFloat(userId, 10);
   try {
     const response = await axios.get(`https://globaleducomm.com/api/users/user/${userIdInt}`);
     return response.data;
