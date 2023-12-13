@@ -6,19 +6,16 @@ import { Link } from "react-router-dom";
 import Button from "../../components/elements/Button";
 import axios from "axios";
 import { useQuery, useQueryClient } from 'react-query';
+import loginUser from "../../loginUser";
 
 export const Dashboard = () => {
   const [expandedItems, setExpandedItems] = useState([]);
   const [firstName, setFirstName] = useState("");
   const queryClient = useQueryClient();
 
-
-  const initialUserId = "User"; 
-
   const fetchUserData = async (userId) => {
     try {
-      const response = await fetch(`https://globaleducomm.com/api/users/user/${userId}`);
-      const userData = await response.json();
+      const userData = await loginUser(userId);
       return userData;
     } catch (error) {
       console.error('Error fetching user data:', error);
@@ -26,7 +23,11 @@ export const Dashboard = () => {
     }
   };
 
-  const { data: userData } = useQuery(['user', initialUserId], () => fetchUserData(initialUserId));
+  const sessionUser = queryClient.getQueryData('user');
+
+  const { data: userData } = useQuery(['user', sessionUser?.userId], () => fetchUserData(sessionUser?.userId), {
+    enabled: !!sessionUser?.userId,
+  });
 
   useEffect(() => {
     if (userData && userData.data && userData.data.length > 0) {
@@ -34,6 +35,8 @@ export const Dashboard = () => {
       setFirstName(user_fname);
     }
   }, [userData]);
+
+
   
 
   const toggleItemExpansion = (index) => {
