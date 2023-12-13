@@ -7,6 +7,7 @@ import loginUser from "../loginUser";
 import axios from "axios";
 import { useQueryClient } from "react-query";
 import SessionProvider from "../SessionProvider";
+import { getCookie } from "../CookieUtils";
 
 
 
@@ -29,13 +30,18 @@ export const LoginForm = () => {
     }));
   };
 
-  const handleLogin = async (userId) => {
-    const user = await loginUser(userId);
+  const handleLogin = async () => {
+    const userId = getCookie('userId');
+  
+    if (!userId) {
+      console.error('User is not logged in. Unable to fetch user data.');
+      return;
+    }
+  
     try {
       setLoading(true);
       const response = await axios.post("https://globaleducomm.com/api/send/login", formData);
       const userData = await loginUser(response.data.userId);
-      console.log("Login API Response:", response.data);
 
       queryClient.setQueryData("user", userData);
       const { message, flashMessage, flashType } = response.data;
@@ -52,14 +58,12 @@ export const LoginForm = () => {
       console.log(message);
     } catch (error) {
       console.error("Login failed", error.response?.data || error.message);
-
       setErrorFlashMessage("Login failed. Please try again.");
     } finally {
       setLoading(false);
     }
-  }
+  };
 
-  
   return (
     <Box container maxWidth="xl" className="mb-2 mx-auto gradient-form">
       <Box className="row">
