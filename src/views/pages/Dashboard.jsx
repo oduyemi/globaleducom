@@ -13,19 +13,22 @@ export const Dashboard = () => {
   const queryClient = useQueryClient();
   const { data: userData } = useQuery('user', fetchUserData);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const userId = userData?.user_id;
-        if (userId) {
-          const response = await axios.get(`https://globaleducomm.com/api/users/user/${userId}`);
-          const { user_fname } = response.data.data[0];
-          setFirstName(user_fname);
-        }
-      } catch (error) {
-        console.error('Error fetching user data:', error);
+useEffect(() => {
+  const fetchData = async () => {
+    try {
+      const userId = userData?.user_id; // This line
+      if (userId) {
+        const response = await axios.get(`https://globaleducomm.com/api/users/user/${userId}`);
+        const { user_fname } = response.data.data[0];
+        setFirstName(user_fname);
       }
-    };
+    } catch (error) {
+      console.error('Error fetching user data:', error);
+    }
+  };
+
+  fetchData();
+}, [userData]);
 
     fetchData();
   }, [userData]);
