@@ -8,6 +8,11 @@ import Register from "../pages/Register";
 import DashboardPage from "../pages/DashboardPage";
 import ProfilePage from "../pages/ProfilePage";
 import { useQueryClient } from 'react-query';
+import SessionProvider from "../SessionProvider";
+
+
+
+
 
 const DefaultLayout = ({ children }) => (
   <>
@@ -24,13 +29,13 @@ const DashboardLayout = ({ children }) => (
 );
 
 const Logout = () => {
-  const navigate = useNavigate(); // Use navigate hook
   const userId = getCookie('userId');
 
   if (userId) {
     clearCookie('userId');
-    navigate('/login'); // Redirect to login page after logout
+    window.location.href = "/";
   }
+  return null;
 };
 
 const Navigation = () => {
@@ -56,7 +61,17 @@ const Navigation = () => {
       <Route path="/login" element={<DefaultLayout><Login /></DefaultLayout>} />
       <Route path="/logout" element={<DefaultLayout><Logout /></DefaultLayout>} />
       <Route path="/register" element={<DefaultLayout><Register /></DefaultLayout>} />
-      <Route path="/dashboard" element={<DashboardLayout><DashboardPage /></DashboardLayout>} />
+      <Route
+        path="/dashboard"
+        element={
+          <DashboardLayout>
+            <SessionProvider user={userId}>
+              <DashboardPage />
+            </SessionProvider>
+          </DashboardLayout>
+        }
+      />
+
       <Route path="/profile" element={<DashboardLayout><ProfilePage /></DashboardLayout>} />
     </Routes>
   );

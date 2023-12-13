@@ -6,6 +6,7 @@ import "../App.css";
 import loginUser from "../loginUser";
 import axios from "axios";
 import { useQueryClient } from "react-query";
+import SessionProvider from "../SessionProvider";
 
 
 
@@ -28,7 +29,8 @@ export const LoginForm = () => {
     }));
   };
 
-  const handleLogin = async () => {
+  const handleLogin = async (userId) => {
+    const user = await loginUser(userId);
     try {
       setLoading(true);
       const response = await axios.post("https://globaleducomm.com/api/send/login", formData);
