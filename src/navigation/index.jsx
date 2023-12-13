@@ -39,8 +39,9 @@ const Logout = () => {
 };
 
 const Navigation = () => {
+  let userId;
   useEffect(() => {
-    const userId = getCookie('userId');
+    userId = getCookie('userId');
     if (userId) {
       console.log('User is logged in. UserId:', userId);
     }
