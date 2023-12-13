@@ -31,7 +31,7 @@ export const LoginForm = () => {
   const handleLogin = async () => {
     try {
       const response = await axios.post("https://globaleducomm.com/api/send/login", formData);
-      const userData = await loginUser();
+      const userData = await loginUser(response.data.userId);
       
       queryClient.setQueryData('user', userData);
       const { message, flashMessage, flashType } = response.data;
