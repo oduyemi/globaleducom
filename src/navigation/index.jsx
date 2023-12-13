@@ -22,6 +22,12 @@ const DashboardLayout = ({ children }) => (
   </>
 );
 
+const Logout = () => {
+  if (session.get("user") != None){
+    clearCookie('userId')
+  }
+};
+
 const Navigation = () => {
   useEffect(() => {
     const userId = getCookie('userId');
@@ -42,6 +48,7 @@ const Navigation = () => {
         }
       />
       <Route path="/login" element={<DefaultLayout><Login /></DefaultLayout>} />
+      <Route path="/logout" element={<DefaultLayout><Logout /></DefaultLayout>} />
       <Route path="/register" element={<DefaultLayout><Register /></DefaultLayout>} />
       <Route path="/dashboard" element={<DashboardLayout><DashboardPage /></DashboardLayout>} />
       <Route path="/profile" element={<DashboardLayout><ProfilePage /></DashboardLayout>} />

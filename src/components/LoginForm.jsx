@@ -7,6 +7,8 @@ import axios from "axios";
 
 export const LoginForm = () => {
   const [loading, setLoading] = useState(false);
+  const [flashMessage, setFlashMessage] = useState("");
+  const [errorFlashMessage, setErrorFlashMessage] = useState("");
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -27,18 +29,19 @@ export const LoginForm = () => {
       const { message, flashMessage, flashType } = response.data;
   
       if (flashType === "success") {
-        console.log(flashMessage);
+        setFlashMessage(flashMessage);
       } else if (flashType === "error") {
-        console.error(flashMessage);
+        setErrorFlashMessage(flashMessage);
       }
   
       console.log(message);
-      window.location.href = "/dashboard"; 
+      window.location.href = "/dashboard";
+  
     } catch (error) {
-      console.error("Login failed:", error.response.data);
-    }
-  };
-
+      console.error("Login failed", error.response.data);
+    } finally {
+  setLoading(false);
+}
   return (
     <Box container maxWidth="xl" className="mb-2 mx-auto gradient-form">
       <Box className="row">
@@ -48,6 +51,10 @@ export const LoginForm = () => {
                 style={{width: "240px"}} alt="logo" />
               <Typography variant="h4" className="mt-1 mb-3 pb-1 text-warning">Login Form</Typography>
             <Typography variant="h6" sx={{ fontSize: "16px" }} paragraph className="text-muted">Please login to your account</Typography>
+            <div>
+              {flashMessage && <div className="success-message">{flashMessage}</div>}
+              {errorFlashMessage && <div className="error-message">{errorFlashMessage}</div>}
+            </div>
             <div className="formgroup mb-3">
               <input
                 className="form-control text-light"
@@ -84,5 +91,5 @@ export const LoginForm = () => {
         </Box>
       </Box>
     </Box>
-  );
-};
+  )};
+}

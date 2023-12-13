@@ -17,8 +17,9 @@ class Dashboard extends Component {
 
   async componentDidMount() {
     try {
-      const response = await axios.get('https://globaleducomm.com/api/users/user/:id');
-      const { user_fname } = response.data;
+      const userId = this.props.user.user_id; 
+      const response = await axios.get(`https://globaleducomm.com/api/users/user/${userId}`);
+      const { user_fname } = response.data.data[0]; 
       this.setState({ firstName: user_fname });
     } catch (error) {
       console.error('Error fetching user data:', error);

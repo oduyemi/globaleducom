@@ -19,9 +19,10 @@ export const getCookie = (name) => {
       cookieString += `; domain=${options.domain}`;
     }
   
-    if (options.secure) {
+    if (options.secure && window.location.protocol === 'https:') {
       cookieString += '; secure';
     }
+    
   
     if (options.httpOnly) {
       cookieString += '; HttpOnly';
@@ -30,3 +31,7 @@ export const getCookie = (name) => {
     document.cookie = cookieString;
   };
   
+
+  export const clearCookie = (name) => {
+    document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+  };

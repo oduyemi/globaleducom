@@ -38,6 +38,12 @@ const navigationConfig = {
         
       ],
     },
+
+    {
+      name: "Logout",
+      url: "/",
+    },
+
     {
       divider: true,
     },

@@ -20,7 +20,8 @@ export const Profile = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await axios.get('https://globaleducomm.com/api/users/user/:id');
+        const userId = this.props.user.user_id;
+        const response = await axios.get(`https://globaleducomm.com/api/users/user/${userId}`);
         const { user_fname, user_lname, user_email, user_phone } = response.data;
         setFormData({
           fname: user_fname,
@@ -48,7 +49,7 @@ export const Profile = () => {
     try {
       setLoading(true);
       const userId = getUserIdFromSession();
-      const response = await axios.put(`https://globaleducomm.com/api/users/user/${userId}`, formData);
+      const response = await axios.put(`https://globaleducomm.com/api/users/user/:id`, formData);
       console.log(response.data); 
     } catch (error) {
       console.error('Error updating user profile:', error);

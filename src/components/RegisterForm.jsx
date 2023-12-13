@@ -50,11 +50,6 @@ export const RegisterForm = () => {
 
     return(
       <Box container maxWidth="xl" className="mb-2 mx-auto gradient-form">
-        {formSubmitted && (
-          <div className={`alert ${flashMessage?.type === "success" ? "alert-success" : "alert-danger"}`}>
-            {flashMessage?.message}
-          </div>
-        )}
       <Box className="row">
         <Box col="6" sx={{ display: "flex", justifyItem: "center", alignItems: "center", flexDirection: "column" }} className="mb-5">
           <div className="mx-auto my-5">
@@ -62,6 +57,13 @@ export const RegisterForm = () => {
                 style={{width: "240px"}} alt="reg" />
                 <Typography variant="h4" className="mt-3 pb-1 text-warning">Registration Form</Typography>
             {/* <Typography variant="h6" sx={{ fontSize: "16px" }} paragraph className="text-muted">Global Educom Registration</Typography> */}
+            
+            {formSubmitted && (
+              <div className={`alert ${flashMessage?.type === "success" ? "alert-success" : "alert-danger"}`}>
+                {flashMessage?.message}
+              </div>
+            )}
+
             <div className="formgroup mb-2">
           <input
             className="form-control text-light mb-2"
