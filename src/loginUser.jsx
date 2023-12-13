@@ -2,8 +2,6 @@ import axios from "axios";
 
 const loginUser = async () => {
   try {
-    const userId = response.data.userId;
-    const userData = await loginUser(userId);
     const response = await axios.get(`https://globaleducomm.com/api/fetch/users/user/${userId}`); 
     return response.data;
   } catch (error) {
@@ -13,3 +11,6 @@ const loginUser = async () => {
 };
 
 export default loginUser;
+
+
+
