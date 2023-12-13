@@ -33,7 +33,8 @@ export const LoginForm = () => {
       setLoading(true);
       const response = await axios.post("https://globaleducomm.com/api/send/login", formData);
       const userData = await loginUser(response.data.userId);
-      
+      console.log("Login API Response:", response.data);
+
       queryClient.setQueryData("user", userData);
       const { message, flashMessage, flashType } = response.data;
 
