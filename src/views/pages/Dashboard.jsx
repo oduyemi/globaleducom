@@ -13,6 +13,18 @@ export const Dashboard = () => {
   const queryClient = useQueryClient();
   const { data: userData } = useQuery('user', fetchUserData);
 
+  const fetchUserData = async (userId) => {
+    try {
+      const response = await fetch(`https://globaleducomm.com/api/users/user/${userId}`);
+      const userData = await response.json();
+      return userData;
+    } catch (error) {
+      console.error('Error fetching user data:', error);
+      throw new Error('Failed to fetch user data');
+    }
+  };
+
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -29,18 +41,6 @@ export const Dashboard = () => {
 
     fetchData();
   }, [userData]);
-
-  const fetchUserData = async (userId) => {
-    try {
-      const response = await fetch(`https://globaleducomm.com/api/users/user/${userId}`);
-      const userData = await response.json();
-
-      return userData;
-    } catch (error) {
-      console.error('Error fetching user data:', error);
-      throw new Error('Failed to fetch user data');
-    }
-  };
 
   const toggleItemExpansion = (index) => {
     setExpandedItems((prevExpandedItems) => {
