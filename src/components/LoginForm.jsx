@@ -62,10 +62,10 @@ export const LoginForm = () => {
                 style={{width: "240px"}} alt="logo" />
               <Typography variant="h4" className="mt-1 mb-3 pb-1 text-warning">Login Form</Typography>
             <Typography variant="h6" sx={{ fontSize: "16px" }} paragraph className="text-muted">Please login to your account</Typography>
-              <div>
-                {flashMessage && <div className="success-message">{flashMessage}</div>}
-                {errorFlashMessage && <div className="error-message">{errorFlashMessage}
-              </div>}
+              <div>{flashMessage && <div className="success-message">{flashMessage}</div>}
+                <div>{errorFlashMessage && <div className="error-message">{errorFlashMessage}</div>}
+          </div>
+
           </div>
             <div className="formgroup mb-3">
               <input
