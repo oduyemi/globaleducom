@@ -12,6 +12,9 @@ export const Dashboard = () => {
   const [firstName, setFirstName] = useState("");
   const queryClient = useQueryClient();
 
+
+  const initialUserId = "User"; 
+
   const fetchUserData = async (userId) => {
     try {
       const response = await fetch(`https://globaleducomm.com/api/users/user/${userId}`);
@@ -23,11 +26,11 @@ export const Dashboard = () => {
     }
   };
 
-  const { data: userData } = useQuery(['user', userData?.user_id], fetchUserData);
+  const { data: userData } = useQuery(['user', initialUserId], () => fetchUserData(initialUserId));
 
   useEffect(() => {
     if (userData && userData.data && userData.data.length > 0) {
-      const { user_fname } = userData.data[0]; 
+      const { user_fname } = userData.data[0];
       setFirstName(user_fname);
     }
   }, [userData]);
