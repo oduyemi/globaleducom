@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import "../App.css";
 import loginUser from "../loginUser";
 import axios from "axios";
-import { useQueryClient } from 'react-query';
+import { useQueryClient } from "react-query";
 
 
 
@@ -34,17 +34,17 @@ export const LoginForm = () => {
       const response = await axios.post("https://globaleducomm.com/api/send/login", formData);
       const userData = await loginUser(response.data.userId);
       
-      queryClient.setQueryData('user', userData);
+      queryClient.setQueryData("user", userData);
       const { message, flashMessage, flashType } = response.data;
 
       if (flashType === "success") {
         setFlashMessage(flashMessage);
-        console.log('Flash Message:', flashMessage);
+        console.log("Flash Message:", flashMessage);
        
         window.location.href = "/dashboard";
       } else if (flashType === "error") {
         setErrorFlashMessage(flashMessage);
-        console.log('Error Flash Message:', flashMessage);
+        console.log("Error Flash Message:", flashMessage);
       }      
       console.log(message);
     } catch (error) {
