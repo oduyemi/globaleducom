@@ -11,7 +11,6 @@ export const Dashboard = () => {
   const [expandedItems, setExpandedItems] = useState([]);
   const [firstName, setFirstName] = useState("");
   const queryClient = useQueryClient();
-  const { data: userData } = useQuery('user', fetchUserData);
 
   const fetchUserData = async (userId) => {
     try {
@@ -24,6 +23,7 @@ export const Dashboard = () => {
     }
   };
 
+  const { data: userData } = useQuery('user', fetchUserData);
 
   useEffect(() => {
     const fetchData = async () => {
