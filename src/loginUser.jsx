@@ -2,7 +2,7 @@ import axios from "axios";
 
 const loginUser = async (userId) => {
   try {
-    const response = await axios.get(`https://globaleducomm.com/api/fetch/users/user/${userId}`); 
+    const response = await axios.get(`https://globaleducomm.com/api/users/user/${userId}`); 
     return response.data;
   } catch (error) {
     console.error("Error fetching user data:", error);
