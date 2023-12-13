@@ -1,12 +1,13 @@
 import React, { useEffect } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import { Header } from "../components/Header";
-import { getCookie } from '../CookieUtils';
+import { getCookie, clearCookie } from '../CookieUtils'; // Import clearCookie
 import Home from "../pages/Home";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import DashboardPage from "../pages/DashboardPage";
 import ProfilePage from "../pages/ProfilePage";
+import { useQueryClient } from 'react-query';
 
 const DefaultLayout = ({ children }) => (
   <>
@@ -23,8 +24,12 @@ const DashboardLayout = ({ children }) => (
 );
 
 const Logout = () => {
-  if (session.get("user") != None){
-    clearCookie('userId')
+  const navigate = useNavigate(); // Use navigate hook
+  const userId = getCookie('userId');
+
+  if (userId) {
+    clearCookie('userId');
+    navigate('/login'); // Redirect to login page after logout
   }
 };
 
@@ -35,6 +40,7 @@ const Navigation = () => {
       console.log('User is logged in. UserId:', userId);
     }
   }, []);
+
   return (
     <Routes>
       <Route
@@ -57,4 +63,3 @@ const Navigation = () => {
 };
 
 export default Navigation;
-

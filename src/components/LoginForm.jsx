@@ -3,9 +3,14 @@ import { Box, Typography } from "@mui/material";
 import Button from "./elements/Button";
 import { Link } from "react-router-dom";
 import "../App.css";
+import loginUser from "../loginUser";
 import axios from "axios";
+import { useQueryClient } from 'react-query';
+
+
 
 export const LoginForm = () => {
+  const queryClient = useQueryClient();
   const [loading, setLoading] = useState(false);
   const [flashMessage, setFlashMessage] = useState("");
   const [errorFlashMessage, setErrorFlashMessage] = useState("");
@@ -25,7 +30,8 @@ export const LoginForm = () => {
   const handleLogin = async () => {
     try {
       const response = await axios.post("https://globaleducomm.com/api/send/login", formData);
-  
+      const userData = await loginUser();
+      queryClient.setQueryData('user', userData);
       const { message, flashMessage, flashType } = response.data;
   
       if (flashType === "success") {
@@ -40,8 +46,10 @@ export const LoginForm = () => {
     } catch (error) {
       console.error("Login failed", error.response.data);
     } finally {
-  setLoading(false);
-}
+      setLoading(false);
+    }
+  };
+  
   return (
     <Box container maxWidth="xl" className="mb-2 mx-auto gradient-form">
       <Box className="row">
@@ -91,5 +99,5 @@ export const LoginForm = () => {
         </Box>
       </Box>
     </Box>
-  )};
+  );
 }

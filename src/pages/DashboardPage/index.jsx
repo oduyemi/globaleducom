@@ -1,4 +1,4 @@
-import Dashboard from "../../views/pages/Dashboard";
+import { Dashboard } from "../../views/pages/Dashboard";
 import { FooterBottom } from "../../components/FooterBottom"
 
 
