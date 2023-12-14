@@ -1,4 +1,5 @@
 export const getCookie = (name) => {
+  console.log("Getting cookie:", name);
   const cookie = document.cookie.split(';').find(cookie => cookie.trim().startsWith(`${name}=`));
   return cookie ? cookie.split('=')[1] : null;
 };
