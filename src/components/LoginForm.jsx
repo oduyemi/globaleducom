@@ -54,6 +54,7 @@ export const LoginForm = () => {
         console.log("Flash Message:", flashMessage);
       
         console.log("Before setCookie");
+        console.log("Setting cookie with expiration time:", new Date(Date.now() + 3600000));
         setCookie('userId', response.data.userId, { expires: new Date(Date.now() + 3600000) });
         console.log("After setCookie");
       
