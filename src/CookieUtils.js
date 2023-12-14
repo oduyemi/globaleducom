@@ -1,7 +1,7 @@
 export const getCookie = (name) => {
   console.log("Getting cookie:", name);
-  const cookie = document.cookie.split(';').find(cookie => cookie.trim().startsWith(`${name}=`));
-  return cookie ? cookie.split('=')[1] : null;
+  const cookies = Object.fromEntries(document.cookie.split("; ").map(cookie => cookie.split("=")));
+  return cookies[name] || null;
 };
 
   
@@ -17,17 +17,7 @@ export const setCookie = (name, value, options = {}) => {
     cookieString += `; path=${options.path}`;
   }
 
-  if (options.domain) {
-    cookieString += `; domain=${options.domain}`;
-  }
-
-  if (options.secure && window.location.protocol === 'https:') {
-    cookieString += '; secure';
-  }
-
-  if (options.httpOnly) {
-    cookieString += '; HttpOnly';
-  }
+  cookieString += '; SameSite=None; Secure';
 
   document.cookie = cookieString;
 };
