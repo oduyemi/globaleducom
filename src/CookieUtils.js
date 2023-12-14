@@ -27,6 +27,7 @@ export const setCookie = (name, value, options = {}) => {
 
   document.cookie = cookieString;
   console.log("Cookie set:", document.cookie);
+  console.log("Checking if cookie is accessible by reading it directly:", document.cookie.indexOf(name));
 };
 
   export const clearCookie = (name) => {
