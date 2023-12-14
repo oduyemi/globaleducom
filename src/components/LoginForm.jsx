@@ -43,6 +43,8 @@ export const LoginForm = () => {
   
     try {
       setLoading(true);
+      const userId = response.data.userId;
+      setCookie('userId', userId, { expires: new Date(Date.now() + 3600000) });
       const response = await axios.post("https://globaleducomm.com/api/send/login", formData);
       const userData = await loginUser(response.data.userId);
 
