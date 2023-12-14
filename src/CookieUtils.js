@@ -3,8 +3,11 @@ export const getCookie = (name) => {
   return cookie ? cookie.split('=')[1] : null;
 };
   
-  export const setCookie = (name, value, options = {}) => {
+export const setCookie = (name, value, options = {}) => {
+    console.log("Setting cookie:", name, value);
     let cookieString = `${name}=${value}`;
+
+    document.cookie = cookieString;
   
     if (options.expires) {
       const expires = new Date(options.expires).toUTCString();
