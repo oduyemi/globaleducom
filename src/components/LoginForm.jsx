@@ -33,6 +33,7 @@ export const LoginForm = () => {
   const handleLogin = async () => {
     console.log("Attempting login...");
     const userId = getCookie('userId');
+    console.log("Getting userId cookie:", userId);
     console.log("Current userId:", userId);
   
     if (!userId) {
