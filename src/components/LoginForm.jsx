@@ -49,8 +49,11 @@ export const LoginForm = () => {
       if (flashType === "success") {
         setFlashMessage(flashMessage);
         console.log("Flash Message:", flashMessage);
-       
+      
+        setCookie('userId', response.data.userId);
+      
         window.location.href = "/dashboard";
+        
       } else if (flashType === "error") {
         setErrorFlashMessage(flashMessage);
         console.log("Error Flash Message:", flashMessage);
