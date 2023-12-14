@@ -38,7 +38,7 @@ export const Dashboard = ({ userId }) => {
       const { user_fname } = userData.data[0];
       setFirstName(user_fname);
     }
-  }, [userData]);
+  }, [userData, firstName]);
 
   const toggleItemExpansion = (index) => {
     setExpandedItems((prevExpandedItems) => {
