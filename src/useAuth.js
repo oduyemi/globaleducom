@@ -17,14 +17,13 @@ const useAuth = () => {
     {
       onSuccess: (data) => {
         if (data.error) {
-       
           console.error("Login failed", data.error);
           throw new Error(data.error.message);
         }
 
         setUserId(data.user.id);
         queryClient.setQueryData('user', data.user);
-        return data;
+        return data; 
       },
     }
   );
@@ -43,6 +42,7 @@ const useAuth = () => {
     error: loginMutation.error,
   };
 };
+
 
 
 export default useAuth;

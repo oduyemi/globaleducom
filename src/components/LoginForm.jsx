@@ -35,22 +35,26 @@ export const LoginForm = () => {
         console.error("Email and password are required.");
         return;
       }
-      
+  
       const loginResult = await login(formData);
+  
+      if (!loginResult) {
+        // Handle undefined result
+        console.error("Login result is undefined");
+        setErrorFlashMessage("Login failed. Please try again.");
+        return;
+      }
   
       if (loginResult.error) {
         console.error("Login failed", loginResult.error);
-        setErrorFlashMessage("Login failed. Please try again.");
-
+        setErrorFlashMessage(loginResult.error.message || "Login failed. Please try again.");
       } else {
         console.log("Login successful. Redirecting to dashboard...");
         window.location.href = "/dashboard";
       }
-
     } catch (error) {
       console.error("Login failed", error);
       setErrorFlashMessage("Login failed. Please try again.");
-
     } finally {
       setLoading(false);
       console.log("Login completed.");
