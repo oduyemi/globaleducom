@@ -31,7 +31,9 @@ export const LoginForm = () => {
   };
 
   const handleLogin = async () => {
+    console.log("Attempting login...");
     const userId = getCookie('userId');
+    console.log("Current userId:", userId);
   
     if (!userId) {
       console.error('User is not logged in. Unable to fetch user data.');
@@ -66,6 +68,7 @@ export const LoginForm = () => {
     } finally {
       setLoading(false);
     }
+    console.log("Login completed.");
   }
 
   return (
