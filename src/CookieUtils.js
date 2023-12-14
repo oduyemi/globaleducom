@@ -5,36 +5,33 @@ export const getCookie = (name) => {
 };
   
 export const setCookie = (name, value, options = {}) => {
-    console.log("Setting cookie:", name, value);
-    let cookieString = `${name}=${value}`;
+  console.log("Setting cookie:", name, value);
 
-    document.cookie = cookieString;
-  
-    if (options.expires) {
-      const expires = new Date(options.expires).toUTCString();
-      cookieString += `; expires=${expires}`;
-    }
-  
-    if (options.path) {
-      cookieString += `; path=${options.path}`;
-    }
-  
-    if (options.domain) {
-      cookieString += `; domain=${options.domain}`;
-    }
-  
-    if (options.secure && window.location.protocol === 'https:') {
-      cookieString += '; secure';
-    }
-    
-  
-    if (options.httpOnly) {
-      cookieString += '; HttpOnly';
-    }
-  
-    document.cookie = cookieString;
-  };
-  
+  let cookieString = `${name}=${value}`;
+
+  if (options.expires) {
+    const expires = new Date(options.expires).toUTCString();
+    cookieString += `; expires=${expires}`;
+  }
+
+  if (options.path) {
+    cookieString += `; path=${options.path}`;
+  }
+
+  if (options.domain) {
+    cookieString += `; domain=${options.domain}`;
+  }
+
+  if (options.secure && window.location.protocol === 'https:') {
+    cookieString += '; secure';
+  }
+
+  if (options.httpOnly) {
+    cookieString += '; HttpOnly';
+  }
+
+  document.cookie = cookieString;
+};
 
   export const clearCookie = (name) => {
     document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
