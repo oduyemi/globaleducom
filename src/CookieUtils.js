@@ -27,7 +27,6 @@ export const setCookie = (name, value, options = {}) => {
     cookieString += '; HttpOnly';
   }
 
-  document.cookie = cookieString;
 };
 
   export const clearCookie = (name) => {
