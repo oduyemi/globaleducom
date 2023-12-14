@@ -1,19 +1,12 @@
 import React, { useEffect } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { Header } from "../components/Header";
-import { getCookie, clearCookie } from '../CookieUtils'; // Import clearCookie
 import Home from "../pages/Home";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import DashboardPage from "../pages/DashboardPage";
 import ProfilePage from "../pages/ProfilePage";
-import { useQueryClient } from 'react-query';
-import SessionProvider from "../SessionProvider";
-import { Navigate } from "react-router-dom";
-
-
-
-
+import useAuth from "../useAuth";
 
 const DefaultLayout = ({ children }) => (
   <>
@@ -22,46 +15,35 @@ const DefaultLayout = ({ children }) => (
   </>
 );
 
-const DashboardLayout = ({ children }) => (
-  <>
-    {/* Header is not included in the Dashboard layout */}
-    {children}
-  </>
-);
+const DashboardLayout = ({ children }) => <>{children}</>;
 
 const Logout = () => {
-  const userId = getCookie('userId');
+  const { logout } = useAuth();
 
   useEffect(() => {
     const logoutUser = async () => {
       try {
-        if (userId) {
-          await clearCookie('userId');
-          window.location.href = "/";
-        }
-
+        await logout();
+        window.location.href = "/";
       } catch (error) {
-        console.error('Error during logout:', error);
+        console.error("Error during logout:", error);
       }
     };
 
     logoutUser();
-  }, [userId]);
+  }, [logout]);
 
   return <Navigate to="/" />;
 };
 
-
-
-
 const Navigation = () => {
-  const userId = getCookie('userId');
+  const { user, userId } = useAuth();
 
   useEffect(() => {
-    if (userId) {
-      console.log('User is logged in. UserId:', userId);
+    if (user) {
+      console.log("User is logged in. UserId:", userId);
     }
-  }, [userId]);
+  }, [user, userId]);
 
   return (
     <Routes>
@@ -80,13 +62,10 @@ const Navigation = () => {
         path="/dashboard"
         element={
           <DashboardLayout>
-            <SessionProvider user={userId}>
-              <DashboardPage />
-            </SessionProvider>
+            {userId && <DashboardPage userId={userId} />}
           </DashboardLayout>
         }
       />
-
       <Route path="/profile" element={<DashboardLayout><ProfilePage /></DashboardLayout>} />
     </Routes>
   );
