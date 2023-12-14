@@ -36,7 +36,6 @@ export const LoginForm = () => {
         return;
       }
 
-      // Call the login function from useAuth directly
       await login(formData);
 
       console.log("Login successful. Redirecting to dashboard...");

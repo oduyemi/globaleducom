@@ -1,33 +1,34 @@
 import React, { useEffect, useState } from "react";
 import { Card, CardBody, Container, Row, Col } from "reactstrap";
-import navigationConfig from "../../_nav"; 
+import navigationConfig from "../../_nav";
 import "../../vibe/scss/styles.scss";
 import { Link } from "react-router-dom";
 import Button from "../../components/elements/Button";
+import { useQuery } from 'react-query';
 import axios from "axios";
-import { useQuery, useQueryClient } from 'react-query';
-import loginUser from "../../loginUser";
 
-export const Dashboard = () => {
+
+const fetchUserData = async (userId) => {
+  try {
+    const response = await axios.get(`https://globaleducomm.com/api/users/user/${userId}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching user data:', error);
+    throw new Error('Failed to fetch user data');
+  }
+};
+
+export const Dashboard = ({ userId }) => {
   const [expandedItems, setExpandedItems] = useState([]);
   const [firstName, setFirstName] = useState("");
-  const queryClient = useQueryClient();
 
-  const fetchUserData = async (userId) => {
-    try {
-      const userData = await loginUser(userId);
-      return userData;
-    } catch (error) {
-      console.error('Error fetching user data:', error);
-      throw new Error('Failed to fetch user data');
+  const { data: userData } = useQuery(
+    ['user', userId],
+    () => fetchUserData(userId),
+    {
+      enabled: !!userId,
     }
-  };
-
-  const sessionUser = queryClient.getQueryData('user');
-
-  const { data: userData } = useQuery(['user', sessionUser?.userId], () => fetchUserData(sessionUser?.userId), {
-    enabled: !!sessionUser?.userId,
-  });
+  );
 
   useEffect(() => {
     if (userData && userData.data && userData.data.length > 0) {
@@ -35,9 +36,6 @@ export const Dashboard = () => {
       setFirstName(user_fname);
     }
   }, [userData]);
-
-
-  
 
   const toggleItemExpansion = (index) => {
     setExpandedItems((prevExpandedItems) => {
@@ -52,7 +50,6 @@ export const Dashboard = () => {
   const heroStyles = {
     padding: "50px 0 70px",
   };
-
   return (
     <Container fluid>
       <Row>

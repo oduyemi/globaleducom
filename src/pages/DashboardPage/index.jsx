@@ -1,12 +1,9 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import { Dashboard } from "../../views/pages/Dashboard";
 import { Typography } from "@mui/material";
 import { useQuery } from "react-query";
 import loginUser from "../../loginUser";
-import { FooterBottom } from "../../components/FooterBottom"
-
-
-
+import { FooterBottom } from "../../components/FooterBottom";
 
 const DashboardPage = ({ userId }) => {
   const { data: userData, isLoading, isError } = useQuery(
@@ -31,13 +28,11 @@ const DashboardPage = ({ userId }) => {
     return <Typography>Error fetching user data.</Typography>;
   }
 
-  // Render your DashboardPage with userData
   return (
     <>
-      <Dashboard />
+      <Dashboard userId={userData.id} /> {/* Pass userId from userData */}
       <FooterBottom />
     </>
-    
   );
 };
 
