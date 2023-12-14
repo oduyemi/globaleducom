@@ -6,8 +6,6 @@ export const getCookie = (name) => {
 
   
 export const setCookie = (name, value, options = {}) => {
-  console.log("Setting cookie:", name, value);
-
   let cookieString = `${name}=${value}`;
 
   if (options.expires) {
@@ -19,6 +17,10 @@ export const setCookie = (name, value, options = {}) => {
     cookieString += `; path=${options.path}`;
   }
 
+  if (options.domain) {
+    cookieString += `; domain=${options.domain}`;
+  }
+
   if (options.secure && window.location.protocol === 'https:') {
     cookieString += '; secure';
   }
@@ -27,6 +29,7 @@ export const setCookie = (name, value, options = {}) => {
     cookieString += '; HttpOnly';
   }
 
+  document.cookie = cookieString;
 };
 
   export const clearCookie = (name) => {
