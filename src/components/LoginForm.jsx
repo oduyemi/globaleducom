@@ -36,7 +36,6 @@ export const LoginForm = () => {
     try {
       setLoading(true);
   
-      // Fetch user ID from the cookie
       const userId = getCookie('userId');
       console.log("Getting userId cookie:", userId);
       
