@@ -26,6 +26,7 @@ export const setCookie = (name, value, options = {}) => {
   cookieString += '; SameSite=None; Secure';
 
   document.cookie = cookieString;
+  console.log("Cookie set:", document.cookie);
 };
 
   export const clearCookie = (name) => {
