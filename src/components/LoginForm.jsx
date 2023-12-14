@@ -58,6 +58,7 @@ export const LoginForm = () => {
         setFlashMessage(flashMessage);
         console.log('userId cookie set:', getCookie('userId'));
         setCookie('userId', response.data.userId, { expires: new Date(Date.now() + 3600000), secure: true, path: '/' });
+        console.log('userId cookie set:', getCookie('userId'));
         console.log("Login successful. Redirecting to dashboard...");
         window.location.href = "/dashboard";
       }      
