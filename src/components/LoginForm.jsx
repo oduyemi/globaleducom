@@ -58,11 +58,12 @@ export const LoginForm = () => {
       console.log(message);
     } catch (error) {
       console.error("Login failed", error.response?.data || error.message);
+
       setErrorFlashMessage("Login failed. Please try again.");
     } finally {
       setLoading(false);
     }
-  };
+  }
 
   return (
     <Box container maxWidth="xl" className="mb-2 mx-auto gradient-form">
