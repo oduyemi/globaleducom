@@ -1,8 +1,8 @@
 export const getCookie = (name) => {
   console.log("Getting cookie:", name);
-  const cookies = Object.fromEntries(document.cookie.split("; ").map(cookie => cookie.split("=")));
-  console.log("All cookies:", cookies);
-  return cookies[name] || null;
+  const cookies = document.cookie.split(';').map(cookie => cookie.trim().split('='));
+  const cookieMap = new Map(cookies);
+  return cookieMap.get(name) || null;
 };
 
   
