@@ -31,6 +31,9 @@ export const Dashboard = ({ userId }) => {
   );
 
   useEffect(() => {
+    console.log('userData in Dashboard:', userData);
+    console.log('firstName in Dashboard:', firstName);
+  
     if (userData && userData.data && userData.data.length > 0) {
       const { user_fname } = userData.data[0];
       setFirstName(user_fname);
