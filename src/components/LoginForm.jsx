@@ -38,7 +38,7 @@ export const LoginForm = () => {
   
       const userId = getCookie('userId');
       console.log("Getting userId cookie:", userId);
-      
+  
       if (!userId) {
         console.error('User is not logged in. Unable to fetch user data.');
         return;
