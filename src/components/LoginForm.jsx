@@ -6,7 +6,6 @@ import "../App.css";
 import loginUser from "../loginUser";
 import axios from "axios";
 import { useQueryClient } from "react-query";
-import SessionProvider from "../SessionProvider";
 import { setCookie } from "../CookieUtils";
 import { getCookie } from "../CookieUtils";
 

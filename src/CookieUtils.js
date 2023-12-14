@@ -1,7 +1,7 @@
 export const getCookie = (name) => {
-    const cookie = document.cookie.split(';').find(cookie => cookie.trim().startsWith(`${name}=`));
-    return cookie ? cookie.split('=')[1] : null;
-  };
+  const cookie = document.cookie.split(';').find(cookie => cookie.trim().startsWith(`${name}=`));
+  return cookie ? cookie.split('=')[1] : null;
+};
   
   export const setCookie = (name, value, options = {}) => {
     let cookieString = `${name}=${value}`;
