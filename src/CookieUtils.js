@@ -1,9 +1,15 @@
 export const getCookie = (name) => {
   console.log("Getting cookie:", name);
+  console.log("All cookies:", document.cookie);
+  
   const cookieRegex = new RegExp(`(?:^|;)\\s*${name}=([^;]*)`);
   const match = document.cookie.match(cookieRegex);
+  
+  console.log("Cookie match:", match);
+  
   return match ? match[1] : null;
 };
+
   
 export const setCookie = (name, value, options = {}) => {
   let cookieString = `${name}=${value}`;
