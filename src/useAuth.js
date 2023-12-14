@@ -7,7 +7,7 @@ const useAuth = () => {
 
   const loginMutation = useMutation(
     (formData) =>
-      fetch('https://your-api/login', {
+      fetch('https://globaleducomm.com/api/send/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -16,8 +16,15 @@ const useAuth = () => {
       }).then((res) => res.json()),
     {
       onSuccess: (data) => {
+        if (data.error) {
+       
+          console.error("Login failed", data.error);
+          throw new Error(data.error.message);
+        }
+
         setUserId(data.user.id);
         queryClient.setQueryData('user', data.user);
+        return data;
       },
     }
   );
@@ -36,5 +43,6 @@ const useAuth = () => {
     error: loginMutation.error,
   };
 };
+
 
 export default useAuth;

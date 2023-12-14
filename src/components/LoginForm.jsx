@@ -27,26 +27,35 @@ export const LoginForm = () => {
 
   const handleLogin = async () => {
     console.log("Attempting login...");
-
+  
     try {
       setLoading(true);
-
+  
       if (!formData.email || !formData.password) {
         console.error("Email and password are required.");
         return;
       }
       
-      await login(formData);
-      console.log("Login successful. Redirecting to dashboard...");
-    
+      const loginResult = await login(formData);
+  
+      if (loginResult.error) {
+        console.error("Login failed", loginResult.error);
+        setErrorFlashMessage("Login failed. Please try again.");
+
+      } else {
+        console.log("Login successful. Redirecting to dashboard...");
+        window.location.href = "/dashboard";
+      }
+
     } catch (error) {
       console.error("Login failed", error);
       setErrorFlashMessage("Login failed. Please try again.");
+
     } finally {
       setLoading(false);
       console.log("Login completed.");
-    }
-  };
+    };
+  }
 
   return (
     <Box container maxWidth="xl" className="mb-2 mx-auto gradient-form">
