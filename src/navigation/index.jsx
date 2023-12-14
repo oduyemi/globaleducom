@@ -62,7 +62,7 @@ const Navigation = () => {
         path="/dashboard"
         element={
           <DashboardLayout>
-            {userId && <DashboardPage userId={userId} />}
+            {<DashboardPage />}
           </DashboardLayout>
         }
       />

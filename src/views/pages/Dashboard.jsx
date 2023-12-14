@@ -18,17 +18,22 @@ const fetchUserData = async (userId) => {
   }
 };
 
-export const Dashboard = ({ userId }) => {
+export const Dashboard = ({ userId, userData }) => {
+  console.log("userId in Dashboard:", userId);
+  console.log("userData in Dashboard:", userData);
   const [expandedItems, setExpandedItems] = useState([]);
   const [firstName, setFirstName] = useState("");
 
-  const { data: userData } = useQuery(
-    ['user', userId],
-    () => fetchUserData(userId),
-    {
-      enabled: !!userId,
+  useEffect(() => {
+    console.log("userData inside useEffect:", userData);
+
+    if (userData && userData.data && userData.data.length > 0) {
+      const { user_fname } = userData.data[0];
+      setFirstName(user_fname);
     }
-  );
+  }, [userData]);
+
+  console.log('Dashboard userData:', userData);
 
   useEffect(() => {
     console.log('userData in Dashboard:', userData);
