@@ -16,24 +16,32 @@ const DashboardPage = ({ userId }) => {
 
   const [firstName, setFirstName] = useState(""); 
 
-  useEffect(() => {
-    console.log('userData:', userData);
-    console.log('isLoading:', isLoading);
-    console.log('isError:', isError);
+  // useEffect(() => {
+  //   console.log('userData:', userData);
+  //   console.log('isLoading:', isLoading);
+  //   console.log('isError:', isError);
 
-    if (userData && userData.data && userData.data.length > 0) {
-      const { user_fname } = userData.data[0];
-      setFirstName(user_fname);
-    }
-  }, [userData, isLoading, isError]);
+  //   if (userData && userData.data && userData.data.length > 0) {
+  //     const { user_fname } = userData.data[0];
+  //     setFirstName(user_fname);
+  //   }
+  // }, [userData, isLoading, isError]);
 
-  if (isLoading) {
-    return <Typography>Loading user data...</Typography>;
-  }
+  // if (isLoading) {
+  //   return <Typography>Loading user data...</Typography>;
+  // }
 
-  if (isError) {
-    return <Typography>Error fetching user data.</Typography>;
-  }
+  // if (isError) {
+  //   return <Typography>Error fetching user data.</Typography>;
+  // }
+    useEffect(() => {
+      console.log('userData:', userData);
+    
+      if (userData) {
+        console.log("User data fetched successfully:", userData);
+      }
+    }, [userData]);
+  
 
   return (
     <>
