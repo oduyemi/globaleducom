@@ -31,6 +31,7 @@ export const LoginForm = () => {
   };
 
   const handleLogin = async () => {
+    console.log("Existing userId cookie:", getCookie('userId'));
     console.log("Attempting login...");
   
     try {
@@ -50,18 +51,15 @@ export const LoginForm = () => {
       queryClient.setQueryData("user", userData);
   
       const { message, flashMessage, flashType } = response.data;
+      console.log("All cookies:", document.cookie);
+
   
       if (flashType === "success") {
         setFlashMessage(flashMessage);
-        
-        setCookie('userId', response.data.userId, { expires: new Date(Date.now() + 3600000), secure: true, path: '/' });
         console.log('userId cookie set:', getCookie('userId'));
-
+        setCookie('userId', response.data.userId, { expires: new Date(Date.now() + 3600000), secure: true, path: '/' });
         console.log("Login successful. Redirecting to dashboard...");
         window.location.href = "/dashboard";
-      } else if (flashType === "error") {
-        setErrorFlashMessage(flashMessage);
-        console.log("Error Flash Message:", flashMessage);
       }      
       
       console.log(message);
