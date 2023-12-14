@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Dashboard } from "../../views/pages/Dashboard";
 import { Typography } from "@mui/material";
 import { useQuery } from "react-query";
@@ -7,18 +7,25 @@ import { FooterBottom } from "../../components/FooterBottom";
 
 const DashboardPage = ({ userId }) => {
   const { data: userData, isLoading, isError } = useQuery(
-    ["userData", userId],
+    ['user', userId],
     () => loginUser(userId),
     {
       enabled: !!userId,
     }
   );
 
+  const [firstName, setFirstName] = useState(""); 
+
   useEffect(() => {
-    if (userData) {
-      console.log("User data fetched successfully:", userData);
+    console.log('userData:', userData);
+    console.log('isLoading:', isLoading);
+    console.log('isError:', isError);
+
+    if (userData && userData.data && userData.data.length > 0) {
+      const { user_fname } = userData.data[0];
+      setFirstName(user_fname);
     }
-  }, [userData]);
+  }, [userData, isLoading, isError]);
 
   if (isLoading) {
     return <Typography>Loading user data...</Typography>;
@@ -30,9 +37,9 @@ const DashboardPage = ({ userId }) => {
 
   return (
     <>
-      <Dashboard userId={userData.id} /> {/* Pass userId from userData */}
-      <FooterBottom />
-    </>
+    <Dashboard userId={userId} setFirstName={setFirstName} />
+    <FooterBottom />
+  </>
   );
 };
 
