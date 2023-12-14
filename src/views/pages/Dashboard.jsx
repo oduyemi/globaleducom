@@ -10,6 +10,10 @@ import axios from "axios";
 
 const fetchUserData = async (userId) => {
   try {
+    if (!userId) {
+      return { loading: true };
+    }
+
     const response = await axios.get(`https://globaleducomm.com/api/users/user/${userId}`);
     return response.data;
   } catch (error) {
@@ -18,33 +22,40 @@ const fetchUserData = async (userId) => {
   }
 };
 
-export const Dashboard = ({ userId, userData }) => {
+
+
+export const Dashboard = ({ userId }) => {
+  const { data: userData, isLoading } = useQuery(
+    ['user', userId],
+    () => fetchUserData(userId),
+    {
+      enabled: !!userId,
+    }
+  );
+  
   console.log("userId in Dashboard:", userId);
   console.log("userData in Dashboard:", userData);
+  
   const [expandedItems, setExpandedItems] = useState([]);
   const [firstName, setFirstName] = useState("");
 
   useEffect(() => {
-    console.log("userData inside useEffect:", userData);
-
+    console.log('Dashboard userData:', userData);
+    
     if (userData && userData.data && userData.data.length > 0) {
       const { user_fname } = userData.data[0];
       setFirstName(user_fname);
     }
   }, [userData]);
 
+  if (!userId || isLoading || (userData && userData.loading)) {
+    return <div>Loading...</div>;
+  }
+
   console.log('Dashboard userData:', userData);
 
-  useEffect(() => {
-    console.log('userData in Dashboard:', userData);
-    console.log('firstName in Dashboard:', firstName);
-  
-    if (userData && userData.data && userData.data.length > 0) {
-      const { user_fname } = userData.data[0];
-      setFirstName(user_fname);
-    }
-  }, [userData, firstName]);
-
+  console.log('userData in Dashboard:', userData);
+  console.log('firstName in Dashboard:', firstName);
   const toggleItemExpansion = (index) => {
     setExpandedItems((prevExpandedItems) => {
       if (prevExpandedItems.includes(index)) {

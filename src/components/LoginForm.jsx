@@ -35,12 +35,10 @@ export const LoginForm = () => {
         console.error("Email and password are required.");
         return;
       }
-
+      
       await login(formData);
       console.log("Login successful. Redirecting to dashboard...");
-      setTimeout(() => {
-        window.location.href = "/dashboard";
-      }, 1000);
+    
     } catch (error) {
       console.error("Login failed", error);
       setErrorFlashMessage("Login failed. Please try again.");
