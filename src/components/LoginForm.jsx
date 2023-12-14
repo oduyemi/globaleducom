@@ -32,50 +32,48 @@ export const LoginForm = () => {
 
   const handleLogin = async () => {
     console.log("Attempting login...");
-    const userId = getCookie('userId');
-    console.log("Getting userId cookie:", userId);
-    console.log("Current userId:", userId);
-  
-    if (!userId) {
-      console.error('User is not logged in. Unable to fetch user data.');
-      return;
-    }
   
     try {
       setLoading(true);
-      const userId = response.data.userId;
-      setCookie('userId', userId, { expires: new Date(Date.now() + 3600000) });
+  
+      // Fetch user ID from the cookie
+      const userId = getCookie('userId');
+      console.log("Getting userId cookie:", userId);
+      
+      if (!userId) {
+        console.error('User is not logged in. Unable to fetch user data.');
+        return;
+      }
+  
       const response = await axios.post("https://globaleducomm.com/api/send/login", formData);
       const userData = await loginUser(response.data.userId);
 
       queryClient.setQueryData("user", userData);
+  
       const { message, flashMessage, flashType } = response.data;
-
+  
       if (flashType === "success") {
         setFlashMessage(flashMessage);
-        console.log("Flash Message:", flashMessage);
-      
-        console.log("Before setCookie");
-        console.log("Setting cookie with expiration time:", new Date(Date.now() + 3600000));
+        
         setCookie('userId', response.data.userId, { expires: new Date(Date.now() + 3600000) });
-        console.log("After setCookie");
-      
+  
+        console.log("Login successful. Redirecting to dashboard...");
         window.location.href = "/dashboard";
-
       } else if (flashType === "error") {
         setErrorFlashMessage(flashMessage);
         console.log("Error Flash Message:", flashMessage);
       }      
+      
       console.log(message);
     } catch (error) {
       console.error("Login failed", error.response?.data || error.message);
       setErrorFlashMessage("Login failed. Please try again.");
     } finally {
       setLoading(false);
+      console.log("Login completed.");
     }
-    console.log("Login completed.");
-  }
-
+  };
+  
   return (
     <Box container maxWidth="xl" className="mb-2 mx-auto gradient-form">
       <Box className="row">
