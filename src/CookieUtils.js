@@ -1,4 +1,6 @@
 export const getCookie = (name) => {
+  const userId = getCookie('userId');
+  console.log("Getting userId cookie:", userId);
   console.log("Getting cookie:", name);
   const cookie = document.cookie.split(';').find(cookie => cookie.trim().startsWith(`${name}=`));
   return cookie ? cookie.split('=')[1] : null;
