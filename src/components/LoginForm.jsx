@@ -52,7 +52,9 @@ export const LoginForm = () => {
         setFlashMessage(flashMessage);
         console.log("Flash Message:", flashMessage);
       
+        console.log("Before setCookie");
         setCookie('userId', response.data.userId);
+        console.log("After setCookie");
       
         window.location.href = "/dashboard";
 
@@ -63,7 +65,6 @@ export const LoginForm = () => {
       console.log(message);
     } catch (error) {
       console.error("Login failed", error.response?.data || error.message);
-
       setErrorFlashMessage("Login failed. Please try again.");
     } finally {
       setLoading(false);
