@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { Header } from "../components/Header";
 import { getCookie, clearCookie } from '../CookieUtils'; // Import clearCookie
 import Home from "../pages/Home";
@@ -9,6 +9,7 @@ import DashboardPage from "../pages/DashboardPage";
 import ProfilePage from "../pages/ProfilePage";
 import { useQueryClient } from 'react-query';
 import SessionProvider from "../SessionProvider";
+import { Navigate } from "react-router-dom";
 
 
 
@@ -31,31 +32,44 @@ const DashboardLayout = ({ children }) => (
 const Logout = () => {
   const userId = getCookie('userId');
 
-  if (userId) {
-    clearCookie('userId');
-    window.location.href = "/";
-  }
-  return null;
+  useEffect(() => {
+    const logoutUser = async () => {
+      try {
+        if (userId) {
+          await clearCookie('userId');
+          window.location.href = "/";
+        }
+
+      } catch (error) {
+        console.error('Error during logout:', error);
+      }
+    };
+
+    logoutUser();
+  }, [userId]);
+
+  return <Navigate to="/" />;
 };
 
+
+
+
 const Navigation = () => {
-  let userId;
+  const userId = getCookie('userId');
+
   useEffect(() => {
-    userId = getCookie('userId');
     if (userId) {
       console.log('User is logged in. UserId:', userId);
     }
-  }, []);
+  }, [userId]);
 
   return (
     <Routes>
       <Route
-        path="/"
+        index
         element={
           <DefaultLayout>
-            <Routes>
-              <Route index element={<Home />} />
-            </Routes>
+            <Home />
           </DefaultLayout>
         }
       />
