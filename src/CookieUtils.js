@@ -1,10 +1,9 @@
 export const getCookie = (name) => {
   console.log("Getting cookie:", name);
-  const cookies = document.cookie.split(';').map(cookie => cookie.trim().split('='));
-  const cookieMap = new Map(cookies);
-  return cookieMap.get(name) || null;
+  const cookieRegex = new RegExp(`(?:^|;)\\s*${name}=([^;]*)`);
+  const match = document.cookie.match(cookieRegex);
+  return match ? match[1] : null;
 };
-
   
 export const setCookie = (name, value, options = {}) => {
   let cookieString = `${name}=${value}`;
