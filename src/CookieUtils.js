@@ -19,10 +19,6 @@ export const setCookie = (name, value, options = {}) => {
     cookieString += `; path=${options.path}`;
   }
 
-  if (options.domain) {
-    cookieString += `; domain=${options.domain}`;
-  }
-
   if (options.secure && window.location.protocol === 'https:') {
     cookieString += '; secure';
   }

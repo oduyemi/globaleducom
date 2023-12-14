@@ -54,7 +54,7 @@ export const LoginForm = () => {
         console.log("Flash Message:", flashMessage);
       
         console.log("Before setCookie");
-        setCookie('userId', response.data.userId);
+        setCookie('userId', response.data.userId, { expires: new Date(Date.now() + 3600000) });
         console.log("After setCookie");
       
         window.location.href = "/dashboard";
