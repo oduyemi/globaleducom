@@ -7,6 +7,7 @@ import loginUser from "../loginUser";
 import axios from "axios";
 import { useQueryClient } from "react-query";
 import SessionProvider from "../SessionProvider";
+import { setCookie } from "../CookieUtils";
 import { getCookie } from "../CookieUtils";
 
 
@@ -53,7 +54,7 @@ export const LoginForm = () => {
         setCookie('userId', response.data.userId);
       
         window.location.href = "/dashboard";
-        
+
       } else if (flashType === "error") {
         setErrorFlashMessage(flashMessage);
         console.log("Error Flash Message:", flashMessage);
