@@ -20,7 +20,7 @@ export const LoginForm = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    
+
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
@@ -41,12 +41,13 @@ export const LoginForm = () => {
       const loginResult = await login(formData);
   
       console.log("Login Result:", loginResult);
-  
+
       if (!loginResult) {
         console.error("Login result is undefined");
         setErrorFlashMessage("Login failed. Please try again.");
         return;
       }
+
   
       if (loginResult.error) {
         console.error("Login failed", loginResult.error);
