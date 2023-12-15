@@ -35,14 +35,21 @@ export const Dashboard = ({ userId }) => {
 
   const [firstName, setFirstName] = useState("");
 
+  console.log('Dashboard userId:', userId);
+  console.log('Dashboard isLoading:', isLoading);
+  console.log('Dashboard isError:', isError);
+  console.log('Dashboard userData:', userData);
+
   useEffect(() => {
-    console.log('Dashboard userData:', userData);
+    console.log('Inside useEffect - Dashboard userData:', userData);
 
     if (userData && userData.data) {
       const { user_fname } = userData.data;
       setFirstName(user_fname);
     }
   }, [userData]);
+
+  console.log('Dashboard firstName:', firstName);
 
   if (isLoading) {
     return <div>Loading...</div>;
