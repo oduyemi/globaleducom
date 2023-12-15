@@ -25,6 +25,7 @@ const fetchUserData = async (userId) => {
 
 export const Dashboard = ({ userId }) => {
   const [expandedItems, setExpandedItems] = useState([]);
+  console.log("userId in Dashboard:", userId);
   const { data: userData, isLoading } = useQuery(
     ['user', userId],
     () => fetchUserData(userId),
