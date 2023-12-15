@@ -12,16 +12,18 @@ const queryClient = new QueryClient();
 
 const root = createRoot(document.getElementById('root'));
 root.render(
-  <QueryClientProvider client={queryClient}>
-    <React.StrictMode>
-      <ErrorBoundary>
-        <BrowserRouter>
-          <SessionProvider>
+  <SessionProvider>
+    <QueryClientProvider client={queryClient}>
+      <React.StrictMode>
+        <ErrorBoundary>
+          <BrowserRouter>
             <App />
-          </SessionProvider>
-        </BrowserRouter>
-      </ErrorBoundary>
-      <ReactQueryDevtools />
-    </React.StrictMode>
-  </QueryClientProvider>
+          </BrowserRouter>
+        </ErrorBoundary>
+        <ReactQueryDevtools />
+      </React.StrictMode>
+    </QueryClientProvider>
+  </SessionProvider>
 );
+
+
