@@ -10,6 +10,7 @@ import axios from "axios";
 
 const fetchUserData = async (userId) => {
   try {
+    console.log('userId in fetchUserData:', userId); 
     if (!userId) {
       return { loading: true };
     }
@@ -23,7 +24,6 @@ const fetchUserData = async (userId) => {
     throw new Error('Failed to fetch user data');
   }
 };
-
 
 
 
