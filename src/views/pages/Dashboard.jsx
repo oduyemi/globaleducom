@@ -14,6 +14,8 @@ const fetchUserData = async (userId) => {
       return { loading: true };
     }
 
+    await new Promise(resolve => setTimeout(resolve, 500));
+
     const response = await axios.get(`https://globaleducomm.com/api/users/user/${userId}`);
     return response.data;
   } catch (error) {
@@ -23,9 +25,10 @@ const fetchUserData = async (userId) => {
 };
 
 
+
+
 export const Dashboard = ({ userId }) => {
   const [expandedItems, setExpandedItems] = useState([]);
-  console.log("userId in Dashboard:", userId);
   const { data: userData, isLoading } = useQuery(
     ['user', userId],
     () => fetchUserData(userId),

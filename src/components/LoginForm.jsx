@@ -47,6 +47,9 @@ export const LoginForm = () => {
         setErrorFlashMessage(loginResult.error.message || "Login failed. Please try again.");
       } else {
         console.log("Login successful. Redirecting to dashboard...");
+        
+        await new Promise(resolve => setTimeout(resolve, 500));
+  
         window.location.href = "/dashboard";
       }
     } catch (error) {
@@ -56,7 +59,8 @@ export const LoginForm = () => {
       setLoading(false);
       console.log("Login completed.");
     };
-  };  
+  };
+  
 
   return (
     <Box container maxWidth="xl" className="mb-2 mx-auto gradient-form">
