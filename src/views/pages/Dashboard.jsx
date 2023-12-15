@@ -25,6 +25,7 @@ const fetchUserData = async (userId) => {
 
 
 export const Dashboard = ({ userId }) => {
+  const [expandedItems, setExpandedItems] = useState([]);
   const { data: userData, isLoading } = useQuery(
     ['user', userId],
     () => fetchUserData(userId),
@@ -32,18 +33,14 @@ export const Dashboard = ({ userId }) => {
       enabled: !!userId,
     }
   );
-  
-  console.log("userId in Dashboard:", userId);
-  console.log("userData in Dashboard:", userData);
-  
-  const [expandedItems, setExpandedItems] = useState([]);
+
   const [firstName, setFirstName] = useState("");
 
   useEffect(() => {
     console.log('Dashboard userData:', userData);
-    
-    if (userData && userData.data && userData.data.length > 0) {
-      const { user_fname } = userData.data[0];
+
+    if (userData && userData.data) {
+      const { user_fname } = userData.data;
       setFirstName(user_fname);
     }
   }, [userData]);
@@ -53,9 +50,9 @@ export const Dashboard = ({ userId }) => {
   }
 
   console.log('Dashboard userData:', userData);
-
-  console.log('userData in Dashboard:', userData);
   console.log('firstName in Dashboard:', firstName);
+  
+
   const toggleItemExpansion = (index) => {
     setExpandedItems((prevExpandedItems) => {
       if (prevExpandedItems.includes(index)) {
