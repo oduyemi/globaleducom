@@ -24,6 +24,7 @@ const fetchUserData = async (userId) => {
 
 
 export const Dashboard = ({ userId }) => {
+  const [expandedItems, setExpandedItems] = useState([]);
   const { data: userData, isLoading, isError } = useQuery(
     ['user', userId],
     () => fetchUserData(userId),
@@ -54,7 +55,8 @@ export const Dashboard = ({ userId }) => {
   console.log('Dashboard userData:', userData);
   console.log('firstName in Dashboard:', firstName);
 
-  
+
+
   const toggleItemExpansion = (index) => {
     setExpandedItems((prevExpandedItems) => {
       if (prevExpandedItems.includes(index)) {
