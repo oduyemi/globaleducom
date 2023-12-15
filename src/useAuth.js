@@ -23,9 +23,10 @@ const useAuth = () => {
           throw new Error(data.error.message);
         }
 
-        setUserId(data.user.id);
+        const newUserId = data.user.id;
+        setUserId(newUserId);
         queryClient.setQueryData('user', data.user);
-        return data;
+        return newUserId;
       },
     }
   );
@@ -44,6 +45,4 @@ const useAuth = () => {
     error: loginMutation.error,
   };
 };
-
-
 export default useAuth;
