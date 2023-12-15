@@ -42,11 +42,12 @@ export const LoginForm = () => {
   
       console.log("Login Result:", loginResult);
 
-      if (!loginResult) {
+      if (typeof loginResult === 'undefined') {
         console.error("Login result is undefined");
         setErrorFlashMessage("Login failed. Please try again.");
         return;
       }
+
 
   
       if (loginResult.error) {
