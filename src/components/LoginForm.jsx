@@ -10,6 +10,7 @@ export const LoginForm = () => {
   const queryClient = useQueryClient();
   const { login } = useAuth();
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
   const [flashMessage, setFlashMessage] = useState("");
   const [errorFlashMessage, setErrorFlashMessage] = useState("");
   const [formData, setFormData] = useState({
@@ -32,34 +33,26 @@ export const LoginForm = () => {
       setLoading(true);
   
       if (!formData.email || !formData.password) {
-        console.error("Email and password are required.");
+        setError("Email and password are required.");
         return;
       }
   
       const loginResult = await login(formData);
   
-      if (!loginResult) {
-        // Handle undefined result
-        console.error("Login result is undefined");
-        setErrorFlashMessage("Login failed. Please try again.");
-        return;
-      }
-  
-      if (loginResult.error) {
-        console.error("Login failed", loginResult.error);
-        setErrorFlashMessage(loginResult.error.message || "Login failed. Please try again.");
+      if (loginResult && loginResult.error) {
+        setError(loginResult.error.message || "Login failed. Please try again.");
       } else {
         console.log("Login successful. Redirecting to dashboard...");
         window.location.href = "/dashboard";
       }
     } catch (error) {
       console.error("Login failed", error);
-      setErrorFlashMessage("Login failed. Please try again.");
+      setError("Login failed. Please try again.");
     } finally {
       setLoading(false);
       console.log("Login completed.");
-    };
-  }
+    }
+  };
 
   return (
     <Box container maxWidth="xl" className="mb-2 mx-auto gradient-form">
