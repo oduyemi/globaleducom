@@ -20,6 +20,7 @@ export const LoginForm = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    
     setFormData((prevData) => ({
       ...prevData,
       [name]: value,
@@ -39,20 +40,30 @@ export const LoginForm = () => {
   
       const loginResult = await login(formData);
   
-      if (loginResult && loginResult.error) {
-        setError(loginResult.error.message || "Login failed. Please try again.");
+      console.log("Login Result:", loginResult);
+  
+      if (!loginResult) {
+        console.error("Login result is undefined");
+        setErrorFlashMessage("Login failed. Please try again.");
+        return;
+      }
+  
+      if (loginResult.error) {
+        console.error("Login failed", loginResult.error);
+        setErrorFlashMessage(loginResult.error.message || "Login failed. Please try again.");
       } else {
         console.log("Login successful. Redirecting to dashboard...");
         window.location.href = "/dashboard";
       }
     } catch (error) {
       console.error("Login failed", error);
-      setError("Login failed. Please try again.");
+      setErrorFlashMessage("Login failed. Please try again.");
     } finally {
       setLoading(false);
       console.log("Login completed.");
     }
   };
+  
 
   return (
     <Box container maxWidth="xl" className="mb-2 mx-auto gradient-form">
