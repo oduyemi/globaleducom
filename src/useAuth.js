@@ -17,18 +17,19 @@ const useAuth = () => {
     {
       onSuccess: (data) => {
         console.log("Login successful. Data received:", data);
-
+  
         if (data.error) {
           console.error("Login failed", data.error);
           throw new Error(data.error.message);
         }
-
+  
         setUserId(data.user.id);
         queryClient.setQueryData('user', data.user);
         return data;
       },
     }
   );
+  
 
   const logout = () => {
     setUserId(null);

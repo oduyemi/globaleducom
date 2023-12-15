@@ -25,7 +25,7 @@ const fetchUserData = async (userId) => {
 
 export const Dashboard = ({ userId }) => {
   const [expandedItems, setExpandedItems] = useState([]);
-  const { data: userData, isLoading, isError } = useQuery(
+  const { data: userData, isLoading } = useQuery(
     ['user', userId],
     () => fetchUserData(userId),
     {
@@ -33,36 +33,26 @@ export const Dashboard = ({ userId }) => {
     }
   );
 
-  const [firstName, setFirstName] = useState("");
+  console.log("userId in Dashboard:", userId);
+  console.log("userData in Dashboard:", userData);
 
-  console.log('Dashboard userId:', userId);
-  console.log('Dashboard isLoading:', isLoading);
-  console.log('Dashboard isError:', isError);
-  console.log('Dashboard userData:', userData);
+  const [firstName, setFirstName] = useState("");
 
   useEffect(() => {
     console.log('Inside useEffect - Dashboard userData:', userData);
 
-    if (userData && userData.data) {
-      const { user_fname } = userData.data;
+    if (userData && userData.data && userData.data.length > 0) {
+      const { user_fname } = userData.data[0];
       setFirstName(user_fname);
     }
   }, [userData]);
 
-  console.log('Dashboard firstName:', firstName);
-
-  if (isLoading) {
+  if (!userId || isLoading || (userData && userData.loading)) {
     return <div>Loading...</div>;
-  }
-
-  if (isError) {
-    return <div>Error fetching user data</div>;
   }
 
   console.log('Dashboard userData:', userData);
   console.log('firstName in Dashboard:', firstName);
-
-
 
   const toggleItemExpansion = (index) => {
     setExpandedItems((prevExpandedItems) => {
