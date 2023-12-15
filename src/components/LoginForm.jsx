@@ -41,16 +41,8 @@ export const LoginForm = () => {
       const loginResult = await login(formData);
   
       console.log("Login Result:", loginResult);
-
-      if (typeof loginResult === 'undefined') {
-        console.error("Login result is undefined");
-        setErrorFlashMessage("Login failed. Please try again.");
-        return;
-      }
-
-
   
-      if (loginResult.error) {
+      if (loginResult && loginResult.error) {
         console.error("Login failed", loginResult.error);
         setErrorFlashMessage(loginResult.error.message || "Login failed. Please try again.");
       } else {
@@ -63,9 +55,8 @@ export const LoginForm = () => {
     } finally {
       setLoading(false);
       console.log("Login completed.");
-    }
-  };
-  
+    };
+  };  
 
   return (
     <Box container maxWidth="xl" className="mb-2 mx-auto gradient-form">
