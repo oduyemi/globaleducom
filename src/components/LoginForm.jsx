@@ -60,12 +60,7 @@ export const LoginForm = () => {
       setLoading(false);
       console.log("Login completed.");
     };
-  };
-
-  const Button = ({ onClick, children }) => (
-    <button onClick={onClick}>{children}</button>
-  );
-  
+  };  
 
   return (
     <Box container maxWidth="xl" className="mb-2 mx-auto gradient-form">
