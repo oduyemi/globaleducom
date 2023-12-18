@@ -52,12 +52,7 @@ export const LoginForm = ({ match }) => {
   
         await new Promise(resolve => setTimeout(resolve, 500));
   
-        // Check if match is defined before accessing its properties
-        if (match && match.params && match.params.userId) {
-          window.location.href = `/dashboard/${match.params.userId}`;
-        } else {
-          console.error("Unable to determine user ID. Redirect failed.");
-        }
+        navigate(`/dashboard/${match.params.userId}`);
       }
     } catch (error) {
       console.error("Login failed", error);
@@ -67,6 +62,7 @@ export const LoginForm = ({ match }) => {
       console.log("Login completed.");
     };
   };
+  
   
   return (
     <Box container maxWidth="xl" className="mb-2 mx-auto gradient-form">
