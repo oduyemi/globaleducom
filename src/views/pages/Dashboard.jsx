@@ -27,7 +27,8 @@ const fetchUserData = async (key, userId) => {
 };
 
 
-export const Dashboard = ({ userId }) => {
+export const Dashboard = ({ match }) => {
+  const userId = match.params.userId;
   const [expandedItems, setExpandedItems] = useState([]);
   const { data: userData, isLoading, isError } = useQuery(
     ['user', userId],

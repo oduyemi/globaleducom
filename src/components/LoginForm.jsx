@@ -7,7 +7,7 @@ import { useQueryClient } from "react-query";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../useAuth";
 
-export const LoginForm = () => {
+export const LoginForm = ({ match }) => {
   const queryClient = useQueryClient();
   const { login } = useAuth();
   const navigate = useNavigate();
@@ -31,28 +31,28 @@ export const LoginForm = () => {
 
   const handleLogin = async () => {
     console.log("Attempting login...");
-  
+
     try {
       setLoading(true);
-  
+
       if (!formData.email || !formData.password) {
         setError("Email and password are required.");
         return;
       }
-  
+
       const loginResult = await login(formData);
-  
+
       console.log("Login Result:", loginResult);
-  
+
       if (loginResult && loginResult.error) {
         console.error("Login failed", loginResult.error);
         setErrorFlashMessage(loginResult.error.message || "Login failed. Please try again.");
       } else {
         console.log("Login successful. Redirecting to dashboard...");
-        
+
         await new Promise(resolve => setTimeout(resolve, 500));
-  
-        navigate("/dashboard");
+
+        window.location.href = `/dashboard/${match.params.userId}`;
       }
     } catch (error) {
       console.error("Login failed", error);
@@ -63,7 +63,7 @@ export const LoginForm = () => {
     };
   };
   
-
+  
   return (
     <Box container maxWidth="xl" className="mb-2 mx-auto gradient-form">
       <Box className="row">
