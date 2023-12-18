@@ -46,9 +46,9 @@ export const Dashboard = ({ userId }) => {
 
   useEffect(() => {
     console.log('Inside useEffect - Dashboard userData:', userData);
-
+  
     if (userData) {
-      const { user_fname } = userData; // Assuming user data is directly in userData
+      const { user_fname } = userData;
       setFirstName(user_fname);
     }
   }, [userData]);
