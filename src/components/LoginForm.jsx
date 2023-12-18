@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { Box, Typography } from "@mui/material";
 import Button from "./elements/Button";
 import { Link } from "react-router-dom";
-import loginUser from "../loginUser";
+// import loginUser from "../loginUser";
 import { useNavigate } from "react-router-dom";
 import { useQueryClient } from "react-query";
 import useAuth from "../useAuth";
@@ -29,20 +29,20 @@ export const LoginForm = () => {
     }));
   };
 
-  const handleLoginClick = async () => {
+  const handleLogin = useCallback(async () => {
     console.log("Attempting login...");
     try {
       setLoading(true);
-
+  
       if (!formData.email || !formData.password) {
         setErrorFlashMessage("Email and password are required.");
         return;
       }
-
+  
       const loginResult = await login(formData);
-
+  
       console.log("Login Result:", loginResult);
-
+  
       if (loginResult && loginResult.error) {
         console.error("Login failed", loginResult.error);
         setErrorFlashMessage(loginResult.error.message || "Login failed. Please try again.");
@@ -57,8 +57,9 @@ export const LoginForm = () => {
     } finally {
       setLoading(false);
       console.log("Login completed.");
-    }
-  };
+    };
+  }, [formData, login, navigate]);
+  
 
   return (
     <Box container maxWidth="xl" className="mb-2 mx-auto gradient-form">
@@ -121,9 +122,9 @@ export const LoginForm = () => {
               />
             </div>
             <div className="text-center pt-1 mb-2 pb-1">
-              <button onClick={handleLoginClick} className="mb-2 w-100" disabled={loading}>
+              <Button type="button" onClick={handleLogin} className="mb-2 w-100" disabled={loading}>
                 {loading ? "Hang on..." : "Login"}
-              </button>
+              </Button>
               <Link className="text-muted" to="#!">
                 Forgot password?
               </Link>
