@@ -28,26 +28,23 @@ const useAuth = () => {
           console.error("Login failed", data.error);
           throw new Error(data.error.message);
         }
-       
-        const newUserId = data.userId;
-        console.log("New UserId:", newUserId);
-        setUserId(newUserId);
-
+  
+        // Update the userId in the useAuth hook
+        setUserId(data.userId);
+  
         queryClient.setQueryData('user', data.user);
-
-        console.log("Updated UserId:", newUserId);
-
-        return { userId: newUserId, user: data.user };
-
-          
-        
+  
+        console.log("Updated UserId:", data.userId);
+  
+        return data;  // Return the entire data object
+  
       } catch (error) {
         console.error("Error during login:", error);
         throw error;
       }
     }
   );
-
+  
   return {
     userId,
     login: loginMutation.mutate,
