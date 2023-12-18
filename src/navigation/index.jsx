@@ -55,7 +55,7 @@ const Navigation = () => {
           </DefaultLayout>
         }
       />
-      <Route  path="/login/:userId" element={<DefaultLayout><Login /></DefaultLayout>} />
+      <Route path="/login" element={<DefaultLayout><Login /></DefaultLayout>} />
       <Route path="/logout" element={<DefaultLayout><Logout /></DefaultLayout>} />
       <Route path="/register" element={<DefaultLayout><Register /></DefaultLayout>} />
       <Route
