@@ -7,6 +7,7 @@ const useAuth = () => {
 
   const updateUserId = (newUserId) => {
     setUserId(newUserId);
+  }
 
   const loginMutation = useMutation(
     async (formData) => {
