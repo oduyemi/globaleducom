@@ -4,12 +4,13 @@ import Button from "./elements/Button";
 import { Link } from "react-router-dom";
 import loginUser from "../loginUser";
 import { useQueryClient } from "react-query";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useAuth from "../useAuth";
 
 export const LoginForm = ({ match }) => {
   const queryClient = useQueryClient();
   const { login } = useAuth();
+  const { userId } = useParams();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -20,8 +21,7 @@ export const LoginForm = ({ match }) => {
     password: "",
   });
 
-  // Extract userId from match.params
-  const userId = match.params.userId;
+  // const userId = match.params.userId;
 
   const handleChange = (e) => {
     const { name, value } = e.target;
