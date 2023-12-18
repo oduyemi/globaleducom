@@ -37,14 +37,15 @@ const useAuth = () => {
 
         console.log("Updated UserId:", newUserId);
 
-        return { userId: newUserId, user: data.user }; // Return an object with userId and user
-
+        return { userId: newUserId, user: data.user };
       } catch (error) {
         console.error("Error during login:", error);
         throw error;
       }
     }
   );
+
+  console.log("loginMutation:", loginMutation);
 
   return {
     userId,
