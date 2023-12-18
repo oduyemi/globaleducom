@@ -29,7 +29,7 @@ export const LoginForm = () => {
     }));
   };
 
-  const handleLogin = async () => {
+  const handleLoginClick = async () => {
     console.log("Attempting login...");
     try {
       setLoading(true);
@@ -121,7 +121,7 @@ export const LoginForm = () => {
               />
             </div>
             <div className="text-center pt-1 mb-2 pb-1">
-              <Button onClick={handleLogin} className="mb-2 w-100" disabled={loading}>
+              <Button onClick={handleLoginClick} className="mb-2 w-100" disabled={loading}>
                 {loading ? "Hang on..." : "Login"}
               </Button>
               <Link className="text-muted" to="#!">
