@@ -46,7 +46,8 @@ const useAuth = () => {
   return {
     userId,
     login: loginMutation.mutate,
+    updateUserId,
   };
-};  
+};
 
 export default useAuth;
