@@ -61,6 +61,10 @@ export const LoginForm = () => {
       console.log("Login completed.");
     };
   };
+
+  const Button = ({ onClick, children }) => (
+    <button onClick={onClick}>{children}</button>
+  );
   
 
   return (
