@@ -43,9 +43,8 @@ export const LoginForm = ({ match }) => {
       }
   
       const loginResult = await login(formData);
-  
       console.log("Login Result:", loginResult);
-  
+
       if (loginResult && loginResult.error) {
         console.error("Login failed", loginResult.error);
         setErrorFlashMessage(loginResult.error.message || "Login failed. Please try again.");
