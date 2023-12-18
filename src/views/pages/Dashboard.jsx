@@ -29,16 +29,31 @@ const fetchUserData = async (userId) => {
 
 
 
+const fetchUserData = async (key, userId) => {
+  try {
+    console.log('userId in fetchUserData:', userId); 
+    if (!userId) {
+      return { loading: true };
+    }
+
+    await new Promise(resolve => setTimeout(resolve, 500));
+
+    const response = await axios.get(`https://globaleducomm.com/api/users/user/${userId}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching user data:', error);
+    throw new Error('Failed to fetch user data');
+  }
+};
+
 export const Dashboard = ({ userId }) => {
   const [expandedItems, setExpandedItems] = useState([]);
   const { data: userData, isLoading, isError } = useQuery(
     ['user', userId],
-    async () => {
-      const response = await fetchUserData(userId);
-      return response.data.user; 
-    },
+    fetchUserData,
     {
       enabled: !!userId,
+      staleTime: 10000, // Set an appropriate stale time
     }
   );
 
