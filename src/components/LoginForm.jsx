@@ -21,7 +21,6 @@ export const LoginForm = ({ match }) => {
     password: "",
   });
 
-  // const userId = match.params.userId;
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -53,9 +52,9 @@ export const LoginForm = ({ match }) => {
       } else {
         console.log("Login successful. Redirecting to dashboard...");
 
-        await new Promise(resolve => setTimeout(resolve, 500));
+        await new Promise((resolve) => setTimeout(resolve, 500));
 
-        window.location.href = `/dashboard/${userId}`;
+        navigate(`/dashboard/${userId}`);
       }
     } catch (error) {
       console.error("Login failed", error);
