@@ -5,6 +5,9 @@ const useAuth = () => {
   const queryClient = useQueryClient();
   const [userId, setUserId] = useState(null);
 
+  const updateUserId = (newUserId) => {
+    setUserId(newUserId);
+
   const loginMutation = useMutation(
     async (formData) => {
       try {
