@@ -42,12 +42,17 @@ export const LoginForm = ({ match }) => {
         return;
       }
   
-      const { userId, error } = await login(formData);
+      const loginResult = await login(formData);
   
-      if (error) {
-        console.error("Login failed", error);
-        setErrorFlashMessage(error.message || "Login failed. Please try again.");
-      } else if (userId) {
+      console.log("Login Result:", loginResult);
+  
+      if (loginResult && loginResult.error) {
+        console.error("Login failed", loginResult.error);
+        setErrorFlashMessage(
+          loginResult.error.message || "Login failed. Please try again."
+        );
+      } else if (loginResult && loginResult.userId !== undefined) {
+        const { userId } = loginResult;
         console.log("Login successful. Redirecting to dashboard...");
   
         await new Promise((resolve) => setTimeout(resolve, 500));
@@ -67,8 +72,6 @@ export const LoginForm = ({ match }) => {
       console.log("Login completed.");
     };
   };
-  
-  
   
   return (
     <Box container maxWidth="xl" className="mb-2 mx-auto gradient-form">
