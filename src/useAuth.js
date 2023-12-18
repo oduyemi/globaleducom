@@ -32,20 +32,19 @@ const useAuth = () => {
   
         const newUserId = data.userId;
         console.log("New UserId:", newUserId);
-        setUserId(newUserId);
   
+        setUserId(newUserId);
         queryClient.setQueryData('user', data.user);
   
         console.log("Updated UserId:", newUserId);
   
-        return { userId: newUserId, error: null };
-  
+        return data; // Return the entire response object
       } catch (error) {
         console.error("Error during login:", error);
-        return { userId: null, error };
+        throw error;
       }
     }
-  );
+  );  
   
   return {
     userId,
