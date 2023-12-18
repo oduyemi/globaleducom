@@ -31,13 +31,9 @@ const fetchUserData = async (userId) => {
 
 export const Dashboard = ({ userId }) => {
   const [expandedItems, setExpandedItems] = useState([]);
-  const { data: userData, isLoading } = useQuery(
+  const { data: userData, isLoading, isError } = useQuery(
     ['user', userId],
-    async () => {
-      const response = await fetchUserData(userId);
-      const data = await response.json();
-      return data.user; 
-    },
+    () => fetchUserData(userId),
     {
       enabled: !!userId,
     }
@@ -50,14 +46,19 @@ export const Dashboard = ({ userId }) => {
 
   useEffect(() => {
     console.log('Inside useEffect - Dashboard userData:', userData);
-  
-    if (userData && userData.user_fname) {
-      setFirstName(userData.user_fname);
+
+    if (userData) {
+      const { user_fname } = userData; // Assuming user data is directly in userData
+      setFirstName(user_fname);
     }
   }, [userData]);
 
-  if (!userId || isLoading || (userData && userData.loading)) {
+  if (isLoading) {
     return <div>Loading...</div>;
+  }
+
+  if (isError) {
+    return <div>Error loading user data.</div>;
   }
 
   console.log('Dashboard userData:', userData);
