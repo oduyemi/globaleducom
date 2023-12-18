@@ -9,7 +9,7 @@ import useAuth from "../useAuth";
 
 export const LoginForm = ({ match }) => {
   const queryClient = useQueryClient();
-  const { login } = useAuth();
+  const { login, updateUserId } = useAuth(); 
   const { userId } = useParams();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
