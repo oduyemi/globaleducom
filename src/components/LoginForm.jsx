@@ -3,7 +3,7 @@ import { Box, Typography } from "@mui/material";
 import Button from "./elements/Button";
 import { Link } from "react-router-dom";
 import loginUser from "../loginUser";
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useQueryClient } from "react-query";
 import useAuth from "../useAuth";
 
@@ -31,6 +31,7 @@ export const LoginForm = () => {
   const handleLogin = async () => {
     console.log("Attempting login...");
   
+    const navigate = useNavigate(); 
     try {
       setLoading(true);
   
@@ -48,10 +49,10 @@ export const LoginForm = () => {
         setErrorFlashMessage(loginResult.error.message || "Login failed. Please try again.");
       } else {
         console.log("Login successful. Redirecting to dashboard...");
-        
+  
         await new Promise(resolve => setTimeout(resolve, 500));
   
-        return <Navigate to= "/dashboard" />;
+        navigate('/dashboard'); 
       }
     } catch (error) {
       console.error("Login failed", error);
