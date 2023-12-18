@@ -29,14 +29,12 @@ const useAuth = () => {
           throw new Error(data.error.message);
         }
   
-        // Update the userId in the useAuth hook
         setUserId(data.userId);
-  
         queryClient.setQueryData('user', data.user);
   
         console.log("Updated UserId:", data.userId);
   
-        return data;  // Return the entire data object
+        return data;
   
       } catch (error) {
         console.error("Error during login:", error);
@@ -49,6 +47,6 @@ const useAuth = () => {
     userId,
     login: loginMutation.mutate,
   };
-};
+};  
 
 export default useAuth;

@@ -67,8 +67,8 @@ export const LoginForm = ({ match }) => {
       setLoading(false);
       console.log("Login completed.");
     };
-  };
-  
+  };  
+
   return (
     <Box container maxWidth="xl" className="mb-2 mx-auto gradient-form">
       <Box className="row">
