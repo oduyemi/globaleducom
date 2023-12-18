@@ -29,16 +29,19 @@ const useAuth = () => {
           throw new Error(data.error.message);
         }
   
-        setUserId(data.userId);
+        const newUserId = data.userId;
+        console.log("New UserId:", newUserId);
+        setUserId(newUserId);
+  
         queryClient.setQueryData('user', data.user);
   
-        console.log("Updated UserId:", data.userId);
+        console.log("Updated UserId:", newUserId);
   
-        return data;
+        return { userId: newUserId, error: null };
   
       } catch (error) {
         console.error("Error during login:", error);
-        throw error;
+        return { userId: null, error };
       }
     }
   );
