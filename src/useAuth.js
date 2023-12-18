@@ -6,7 +6,8 @@ const useAuth = () => {
   const [userId, setUserId] = useState(null);
 
   const updateUserId = (newUserId) => {
-    setUserId(newUserId);
+    const userIdAsNumber = parseInt(newUserId, 10);
+    setUserId(userIdAsNumber);
   }
 
   const loginMutation = useMutation(
