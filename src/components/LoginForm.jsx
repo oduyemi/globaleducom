@@ -4,11 +4,13 @@ import Button from "./elements/Button";
 import { Link } from "react-router-dom";
 import loginUser from "../loginUser";
 import { useQueryClient } from "react-query";
+import { useNavigate } from 'react-router-dom';
 import useAuth from "../useAuth";
 
 export const LoginForm = () => {
   const queryClient = useQueryClient();
   const { login } = useAuth();
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [flashMessage, setFlashMessage] = useState("");
@@ -50,7 +52,7 @@ export const LoginForm = () => {
         
         await new Promise(resolve => setTimeout(resolve, 500));
   
-        window.location.href = "/dashboard";
+        navigate('/dashboard');
       }
     } catch (error) {
       console.error("Login failed", error);

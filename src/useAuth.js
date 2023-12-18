@@ -6,39 +6,38 @@ const useAuth = () => {
   const [userId, setUserId] = useState(null);
 
   const loginMutation = useMutation(
-    (formData) =>
-      fetch('https://globaleducomm.com/api/send/login', {
+    async (formData) => {
+      const response = await fetch('https://globaleducomm.com/api/send/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(formData),
-      }).then((res) => res.json()),
-    {
-      onSuccess: (data) => {
-        console.log("Login successful. Data received:", data);
+      });
 
-        if (data.error) {
-          console.error("Login failed", data.error);
-          throw new Error(data.error.message);
-        }
+      const data = await response.json();
 
-        const newUserId = data.user.id;
-        console.log("New UserId:", newUserId);
-        setUserId(newUserId);
+      if (data.error) {
+        console.error("Login failed", data.error);
+        throw new Error(data.error.message);
+      }
 
-        queryClient.setQueryData('user', data.user);
+      const newUserId = data.user.id;
+      console.log("New UserId:", newUserId);
+      setUserId(newUserId);
 
-        console.log("Updated UserId:", newUserId);
-        return newUserId;
-      },
-    }
+      queryClient.setQueryData('user', data.user);
+
+      console.log("Updated UserId:", newUserId);
+      return newUserId;
+    },
   );
 
   return {
     userId,
-    loginMutation,
+    login: loginMutation.mutate,
   };
 };
+
 
 export default useAuth;
