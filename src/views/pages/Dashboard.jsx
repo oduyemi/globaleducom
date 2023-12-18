@@ -31,7 +31,11 @@ export const Dashboard = ({ userId }) => {
   const [expandedItems, setExpandedItems] = useState([]);
   const { data: userData, isLoading } = useQuery(
     ['user', userId],
-    () => fetchUserData(userId),
+    async () => {
+      const response = await fetchUserData(userId);
+      const data = await response.json();
+      return data.user; 
+    },
     {
       enabled: !!userId,
     }
