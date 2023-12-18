@@ -6,8 +6,7 @@ const useAuth = () => {
   const [userId, setUserId] = useState(null);
 
   const updateUserId = (newUserId) => {
-    const userIdAsNumber = parseInt(newUserId, 10);
-    setUserId(userIdAsNumber);
+    setUserId(newUserId);
   }
 
   const loginMutation = useMutation(
@@ -20,36 +19,37 @@ const useAuth = () => {
           },
           body: JSON.stringify(formData),
         });
-  
+
         const data = await response.json();
-  
+
         console.log("Login API Response:", data);
-  
+
         if (data.error) {
           console.error("Login failed", data.error);
           throw new Error(data.error.message);
         }
-  
+
         const newUserId = data.userId;
         console.log("New UserId:", newUserId);
-  
         setUserId(newUserId);
+
         queryClient.setQueryData('user', data.user);
-  
+
         console.log("Updated UserId:", newUserId);
-  
-        return data; // Return the entire response object
+
+        return { userId: newUserId, user: data.user };
       } catch (error) {
         console.error("Error during login:", error);
         throw error;
       }
     }
-  );  
-  
+  );
+
+  console.log("loginMutation:", loginMutation);
+
   return {
     userId,
     login: loginMutation.mutate,
-    updateUserId,
   };
 };
 
