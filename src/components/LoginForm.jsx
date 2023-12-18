@@ -20,6 +20,9 @@ export const LoginForm = ({ match }) => {
     password: "",
   });
 
+  // Extract userId from match.params
+  const userId = match.params.userId;
+
   const handleChange = (e) => {
     const { name, value } = e.target;
 
@@ -31,28 +34,28 @@ export const LoginForm = ({ match }) => {
 
   const handleLogin = async () => {
     console.log("Attempting login...");
-  
+
     try {
       setLoading(true);
-  
+
       if (!formData.email || !formData.password) {
         setError("Email and password are required.");
         return;
       }
-  
+
       const loginResult = await login(formData);
-  
+
       console.log("Login Result:", loginResult);
-  
+
       if (loginResult && loginResult.error) {
         console.error("Login failed", loginResult.error);
         setErrorFlashMessage(loginResult.error.message || "Login failed. Please try again.");
       } else {
         console.log("Login successful. Redirecting to dashboard...");
-  
+
         await new Promise(resolve => setTimeout(resolve, 500));
-  
-        navigate(`/dashboard/${match.params.userId}`);
+
+        window.location.href = `/dashboard/${userId}`;
       }
     } catch (error) {
       console.error("Login failed", error);
@@ -60,10 +63,8 @@ export const LoginForm = ({ match }) => {
     } finally {
       setLoading(false);
       console.log("Login completed.");
-    };
+    }
   };
-  
-  
   return (
     <Box container maxWidth="xl" className="mb-2 mx-auto gradient-form">
       <Box className="row">
