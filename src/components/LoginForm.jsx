@@ -42,28 +42,15 @@ export const LoginForm = ({ match }) => {
         return;
       }
   
-      const loginResult = await login(formData);
+      const newUserId = await login(formData);
   
-      console.log("Login Result:", loginResult);
+      console.log("Login successful. Redirecting to dashboard...");
   
-      if (loginResult && loginResult.error) {
-        console.error("Login failed", loginResult.error);
-        setErrorFlashMessage(
-          loginResult.error.message || "Login failed. Please try again."
-        );
-      } else if (loginResult && loginResult.userId !== undefined) {
-        const { userId } = loginResult;
-        console.log("Login successful. Redirecting to dashboard...");
+      await new Promise((resolve) => setTimeout(resolve, 500));
   
-        await new Promise((resolve) => setTimeout(resolve, 500));
+      updateUserId(newUserId);
   
-        updateUserId(userId);
-  
-        navigate(`/dashboard/${userId}`);
-      } else {
-        console.error("Login result is missing userId");
-        setErrorFlashMessage("Login failed. Please try again.");
-      }
+      navigate(`/dashboard/${newUserId}`);
     } catch (error) {
       console.error("Login failed", error);
       setErrorFlashMessage("Login failed. Please try again.");
