@@ -14,6 +14,7 @@ export const LoginForm = () => {
   const [error, setError] = useState("");
   const [flashMessage, setFlashMessage] = useState("");
   const [errorFlashMessage, setErrorFlashMessage] = useState("");
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -29,9 +30,7 @@ export const LoginForm = () => {
   };
 
   const handleLogin = async () => {
-    console.log("Attempting login...");
-  
-    const navigate = useNavigate(); 
+    console.log("Attempting login..."); 
     try {
       setLoading(true);
   
