@@ -33,28 +33,32 @@ export const LoginForm = ({ match }) => {
 
   const handleLogin = async () => {
     console.log("Attempting login...");
-
+  
     try {
       setLoading(true);
-
+  
       if (!formData.email || !formData.password) {
         setError("Email and password are required.");
         return;
       }
-
+  
       const loginResult = await login(formData);
-
+  
       console.log("Login Result:", loginResult);
-
+  
       if (loginResult && loginResult.error) {
         console.error("Login failed", loginResult.error);
         setErrorFlashMessage(loginResult.error.message || "Login failed. Please try again.");
-      } else {
+      } else if (loginResult && loginResult.userId) {
+        const { userId } = loginResult;
         console.log("Login successful. Redirecting to dashboard...");
-
+  
         await new Promise((resolve) => setTimeout(resolve, 500));
-
+  
         navigate(`/dashboard/${userId}`);
+      } else {
+        console.error("Login result is missing userId");
+        setErrorFlashMessage("Login failed. Please try again.");
       }
     } catch (error) {
       console.error("Login failed", error);
@@ -62,8 +66,9 @@ export const LoginForm = ({ match }) => {
     } finally {
       setLoading(false);
       console.log("Login completed.");
-    }
+    };
   };
+  
   return (
     <Box container maxWidth="xl" className="mb-2 mx-auto gradient-form">
       <Box className="row">
