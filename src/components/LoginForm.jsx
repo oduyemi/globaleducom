@@ -4,7 +4,7 @@ import Button from "./elements/Button";
 import { Link } from "react-router-dom";
 import loginUser from "../loginUser";
 import { useQueryClient } from "react-query";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import useAuth from "../useAuth";
 
 export const LoginForm = () => {
@@ -52,7 +52,7 @@ export const LoginForm = () => {
         
         await new Promise(resolve => setTimeout(resolve, 500));
   
-        navigate('/dashboard');
+        navigate("/dashboard");
       }
     } catch (error) {
       console.error("Login failed", error);
@@ -140,7 +140,7 @@ export const LoginForm = () => {
                 paragraph
                 className="mb-0 "
               >
-                Don't have an account?
+                Don&apos;t have an account?
                 <span>
                   <Link to="/register">
                     <Typography
