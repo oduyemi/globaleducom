@@ -10,7 +10,7 @@ import axios from "axios";
 
 const fetchUserData = async (userId) => {
   try {
-    console.log('userId in fetchUserData:', userId); 
+    console.log('userId in fetchUserData:', userId);
     if (!userId) {
       return { loading: true };
     }
@@ -18,12 +18,13 @@ const fetchUserData = async (userId) => {
     await new Promise(resolve => setTimeout(resolve, 500));
 
     const response = await axios.get(`https://globaleducomm.com/api/users/user/${userId}`);
-    return response.data;
+    return response.data; 
   } catch (error) {
     console.error('Error fetching user data:', error);
     throw new Error('Failed to fetch user data');
   }
 };
+
 
 
 
@@ -48,10 +49,9 @@ export const Dashboard = ({ userId }) => {
 
   useEffect(() => {
     console.log('Inside useEffect - Dashboard userData:', userData);
-
-    if (userData && userData.data && userData.data.length > 0) {
-      const { user_fname } = userData.data[0];
-      setFirstName(user_fname);
+  
+    if (userData && userData.user_fname) {
+      setFirstName(userData.user_fname);
     }
   }, [userData]);
 
