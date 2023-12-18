@@ -48,10 +48,12 @@ export const Dashboard = ({ userId }) => {
     console.log('Inside useEffect - Dashboard userData:', userData);
   
     if (userData) {
-      const { user_fname } = userData;
+      console.log('Full userData:', userData); 
+      const { user_fname } = userData; 
       setFirstName(user_fname);
     }
   }, [userData]);
+  
 
   if (isLoading) {
     return <div>Loading...</div>;
