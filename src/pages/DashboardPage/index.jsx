@@ -4,11 +4,11 @@ import { FooterBottom } from "../../components/FooterBottom";
 import useAuth from "../../useAuth";
 
 const DashboardPage = () => {
-  const { userId } = useAuth();
+  const auth = useAuth();
 
   return (
     <>
-      <Dashboard userId={userId} />
+      <Dashboard auth={auth} />
       <FooterBottom />
     </>
   );
