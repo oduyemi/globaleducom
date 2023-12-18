@@ -3,6 +3,7 @@ import { Box, Typography } from "@mui/material";
 import Button from "./elements/Button";
 import { Link } from "react-router-dom";
 import loginUser from "../loginUser";
+import { Navigate } from "react-router-dom";
 import { useQueryClient } from "react-query";
 import useAuth from "../useAuth";
 
@@ -50,7 +51,7 @@ export const LoginForm = () => {
         
         await new Promise(resolve => setTimeout(resolve, 500));
   
-        window.location.href = "/dashboard";
+        return <Navigate to= "/dashboard" />;
       }
     } catch (error) {
       console.error("Login failed", error);

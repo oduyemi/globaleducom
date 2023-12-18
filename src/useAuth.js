@@ -17,24 +17,28 @@ const useAuth = () => {
     {
       onSuccess: (data) => {
         console.log("Login successful. Data received:", data);
-  
+
         if (data.error) {
           console.error("Login failed", data.error);
           throw new Error(data.error.message);
         }
-  
+
         const newUserId = data.user.id;
         console.log("New UserId:", newUserId);
         setUserId(newUserId);
-  
+
         queryClient.setQueryData('user', data.user);
-  
+
         console.log("Updated UserId:", newUserId);
         return newUserId;
       },
     }
+  );
 
-)};
-  
+  return {
+    userId,
+    loginMutation,
+  };
+};
 
 export default useAuth;
