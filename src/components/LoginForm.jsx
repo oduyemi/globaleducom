@@ -54,6 +54,8 @@ export const LoginForm = ({ match }) => {
         console.log("Login successful. Redirecting to dashboard...");
   
         await new Promise((resolve) => setTimeout(resolve, 500));
+
+        updateUserId(userId);
   
         navigate(`/dashboard/${userId}`);
       } else {
