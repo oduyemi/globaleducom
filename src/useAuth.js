@@ -44,7 +44,6 @@ const useAuth = () => {
       }
     }
   );
-
   console.log("loginMutation:", loginMutation);
 
   return {
