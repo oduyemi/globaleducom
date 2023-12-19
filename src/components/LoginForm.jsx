@@ -50,26 +50,30 @@ export const LoginForm = ({ match }) => {
       console.error("Login failed", loginResult.error);
       setErrorFlashMessage(loginResult.error.message || "Login failed. Please try again.");
     } else if (loginResult) {
-      console.log("Login successful. Redirecting to dashboard...");
-
-      await new Promise((resolve) => setTimeout(resolve, 500));
+      console.log("Login successful. Updating user ID...");
 
       if (loginResult.userId !== undefined) {
         updateUserId(loginResult.userId);
-
-        navigate(`/dashboard/${loginResult.userId}`);
       } else {
         console.error("User ID is undefined in login result.");
       }
+      }
+    } catch (error) {
+      console.error("Login failed", error);
+      setErrorFlashMessage("Login failed. Please try again.");
+    } finally {
+      setLoading(false);
+      console.log("Login completed.");
     }
-  } catch (error) {
-    console.error("Login failed", error);
-    setErrorFlashMessage("Login failed. Please try again.");
-  } finally {
-    setLoading(false);
-    console.log("Login completed.");
   };
-};
+
+  useEffect(() => {
+    if (userId !== null) {
+      console.log("Redirecting to dashboard...");
+      navigate(`/dashboard/${userId}`);
+    }
+  }, [userId]);
+
   return (
     <Box container maxWidth="xl" className="mb-2 mx-auto gradient-form">
       <Box className="row">
