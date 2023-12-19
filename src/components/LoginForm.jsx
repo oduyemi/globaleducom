@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Box, Typography } from "@mui/material";
 import Button from "./elements/Button";
 import { Link } from "react-router-dom";
@@ -6,6 +6,7 @@ import loginUser from "../loginUser";
 import { useQueryClient } from "react-query";
 import { useNavigate, useParams } from "react-router-dom";
 import useAuth from "../useAuth";
+
 
 export const LoginForm = ({ match }) => {
   const queryClient = useQueryClient();
@@ -21,6 +22,8 @@ export const LoginForm = ({ match }) => {
     password: "",
   });
 
+ 
+  const loginResultRef = useRef(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -33,30 +36,30 @@ export const LoginForm = ({ match }) => {
 
   const handleLogin = async () => {
     console.log("Attempting login...");
-  
+
     try {
       setLoading(true);
-  
+
       if (!formData.email || !formData.password) {
         setError("Email and password are required.");
         return;
       }
-  
-      const loginResult = await login(formData);
 
-    console.log("Login Result:", loginResult);
+      loginResultRef.current = await login(formData);
 
-    if (loginResult && loginResult.error) {
-      console.error("Login failed", loginResult.error);
-      setErrorFlashMessage(loginResult.error.message || "Login failed. Please try again.");
-    } else if (loginResult) {
-      console.log("Login successful. Updating user ID...");
+      console.log("Login Result:", loginResultRef.current);
 
-      if (loginResult.userId !== undefined) {
-        updateUserId(loginResult.userId);
-      } else {
-        console.error("User ID is undefined in login result.");
-      }
+      if (loginResultRef.current && loginResultRef.current.error) {
+        console.error("Login failed", loginResultRef.current.error);
+        setErrorFlashMessage(loginResultRef.current.error.message || "Login failed. Please try again.");
+      } else if (loginResultRef.current) {
+        console.log("Login successful. Updating user ID...");
+
+        if (loginResultRef.current.userId !== undefined) {
+          updateUserId(loginResultRef.current.userId);
+        } else {
+          console.error("User ID is undefined in login result.");
+        }
       }
     } catch (error) {
       console.error("Login failed", error);
@@ -68,11 +71,13 @@ export const LoginForm = ({ match }) => {
   };
 
   useEffect(() => {
-    if (userId !== null) {
+    const { userId: resultUserId } = loginResultRef.current || {};
+    
+    if (resultUserId !== undefined) {
       console.log("Redirecting to dashboard...");
-      navigate(`/dashboard/${userId}`);
+      navigate(`/dashboard/${resultUserId}`);
     }
-  }, [userId]);
+  }, []); 
 
   return (
     <Box container maxWidth="xl" className="mb-2 mx-auto gradient-form">
