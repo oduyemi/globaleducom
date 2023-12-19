@@ -49,13 +49,14 @@ export const LoginForm = ({ match }) => {
     if (loginResult && loginResult.error) {
       console.error("Login failed", loginResult.error);
       setErrorFlashMessage(loginResult.error.message || "Login failed. Please try again.");
-    } else if (loginResult) { 
+    } else if (loginResult) {
       console.log("Login successful. Redirecting to dashboard...");
 
       await new Promise((resolve) => setTimeout(resolve, 500));
 
       if (loginResult.userId !== undefined) {
         updateUserId(loginResult.userId);
+
         navigate(`/dashboard/${loginResult.userId}`);
       } else {
         console.error("User ID is undefined in login result.");
@@ -68,8 +69,7 @@ export const LoginForm = ({ match }) => {
     setLoading(false);
     console.log("Login completed.");
   };
-};  
-  
+};
   return (
     <Box container maxWidth="xl" className="mb-2 mx-auto gradient-form">
       <Box className="row">
