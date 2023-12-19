@@ -60,7 +60,6 @@ export const LoginForm = ({ match }) => {
         if (loginResult.userId !== undefined) {
           updateUserId(loginResult.userId);
   
-          // Redirect after updating the user ID
           navigate(`/dashboard/${loginResult.userId}`);
         } else {
           console.error("User ID is undefined in login result.");
@@ -74,6 +73,7 @@ export const LoginForm = ({ match }) => {
       console.log("Login completed.");
     };
   };
+  
 
   useEffect(() => {
     const { userId: resultUserId } = loginResultRef.current || {};
