@@ -10,7 +10,7 @@ import useAuth from "../useAuth";
 
 export const LoginForm = ({ match }) => {
   const queryClient = useQueryClient();
-  const { login, updateUserId } = useAuth(); 
+  const { login, updateUserId } = useAuth();
   const { userId } = useParams();
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
@@ -39,24 +39,24 @@ export const LoginForm = ({ match }) => {
 
     try {
       setLoading(true);
-
+  
       if (!formData.email || !formData.password) {
         setError("Email and password are required.");
         return;
       }
-
-      loginResultRef.current = await login(formData);
-
-      console.log("Login Result:", loginResultRef.current);
-
-      if (loginResultRef.current && loginResultRef.current.error) {
-        console.error("Login failed", loginResultRef.current.error);
-        setErrorFlashMessage(loginResultRef.current.error.message || "Login failed. Please try again.");
-      } else if (loginResultRef.current) {
+  
+      const loginResult = await login(formData);
+  
+      console.log("Login Result:", loginResult);
+  
+      if (loginResult && loginResult.error) {
+        console.error("Login failed", loginResult.error);
+        setErrorFlashMessage(loginResult.error.message || "Login failed. Please try again.");
+      } else if (loginResult) {
         console.log("Login successful. Updating user ID...");
-
-        if (loginResultRef.current.userId !== undefined) {
-          updateUserId(loginResultRef.current.userId);
+  
+        if (loginResult.userId !== undefined) {
+          updateUserId(loginResult.userId);
         } else {
           console.error("User ID is undefined in login result.");
         }

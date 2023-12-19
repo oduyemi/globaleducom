@@ -7,7 +7,7 @@ const useAuth = () => {
 
   const updateUserId = (newUserId) => {
     setUserId(newUserId);
-  }
+  };
 
   const loginMutation = useMutation(
     async (formData) => {
@@ -43,18 +43,16 @@ const useAuth = () => {
         throw error;
       }
     }
-  );  
-  
+  );
+
   console.log("loginMutation:", loginMutation);
 
   return {
     userId,
     login: loginMutation.mutate,
+    updateUserId,
   };
 };
 
 export default useAuth;
-
-
-
 
