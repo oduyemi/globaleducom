@@ -55,12 +55,12 @@ export const LoginForm = ({ match }) => {
       } else if (loginResult) {
         console.log("Login successful. Updating user ID...");
   
-        console.log("loginResult.userId:", loginResult.userId);
+        console.log("loginResult.data.userId:", loginResult.data.userId);
   
-        if (loginResult.userId !== undefined) {
-          updateUserId(loginResult.userId);
+        if (loginResult.data.userId !== undefined) {
+          updateUserId(loginResult.data.userId);
   
-          navigate(`/dashboard/${loginResult.userId}`);
+          navigate(`/dashboard/${loginResult.data.userId}`);
         } else {
           console.error("User ID is undefined in login result.");
         }
@@ -72,7 +72,7 @@ export const LoginForm = ({ match }) => {
       setLoading(false);
       console.log("Login completed.");
     };
-  };
+  };  
   
 
   useEffect(() => {
