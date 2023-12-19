@@ -72,12 +72,13 @@ export const LoginForm = ({ match }) => {
 
   useEffect(() => {
     const { userId: resultUserId } = loginResultRef.current || {};
+
     console.log("resultUserId:", resultUserId);
     console.log("loginResultRef.current:", loginResultRef.current);
-
+  
     if (resultUserId !== undefined) {
       console.log("Redirecting to dashboard...");
-      navigate(`/dashboard/${resultUserId}`);
+      window.location.href = `/dashboard/${resultUserId}`;
     }
   }, []);
   return (
