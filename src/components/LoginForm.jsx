@@ -36,7 +36,7 @@ export const LoginForm = ({ match }) => {
 
   const handleLogin = async () => {
     console.log("Attempting login...");
-
+  
     try {
       setLoading(true);
   
@@ -57,6 +57,8 @@ export const LoginForm = ({ match }) => {
   
         if (loginResult.userId !== undefined) {
           updateUserId(loginResult.userId);
+  
+          navigate(`/dashboard/${loginResult.userId}`);
         } else {
           console.error("User ID is undefined in login result.");
         }
@@ -69,6 +71,7 @@ export const LoginForm = ({ match }) => {
       console.log("Login completed.");
     }
   };
+  
 
   useEffect(() => {
     const { userId: resultUserId } = loginResultRef.current || {};
