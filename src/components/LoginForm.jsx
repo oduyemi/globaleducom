@@ -55,6 +55,8 @@ export const LoginForm = ({ match }) => {
       } else if (loginResult) {
         console.log("Login successful. Updating user ID...");
   
+        console.log("loginResult.userId:", loginResult.userId);
+  
         if (loginResult.userId !== undefined) {
           updateUserId(loginResult.userId);
   
@@ -71,6 +73,7 @@ export const LoginForm = ({ match }) => {
       console.log("Login completed.");
     }
   };
+  
   
 
   useEffect(() => {
