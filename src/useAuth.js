@@ -37,13 +37,14 @@ const useAuth = () => {
 
         console.log("Updated UserId:", newUserId);
 
-        return { userId: newUserId, user: data.user };
+        return { data: { userId: newUserId, user: data.user } }; // Update this line
       } catch (error) {
         console.error("Error during login:", error);
         throw error;
       }
     }
   );
+
   console.log("loginMutation:", loginMutation);
 
   return {
@@ -52,6 +53,8 @@ const useAuth = () => {
     updateUserId,
   };
 };
+
+
 
 export default useAuth;
 
