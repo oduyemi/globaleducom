@@ -60,6 +60,7 @@ export const LoginForm = ({ match }) => {
         if (loginResult.userId !== undefined) {
           updateUserId(loginResult.userId);
   
+          // Redirect after updating the user ID
           navigate(`/dashboard/${loginResult.userId}`);
         } else {
           console.error("User ID is undefined in login result.");
@@ -71,10 +72,8 @@ export const LoginForm = ({ match }) => {
     } finally {
       setLoading(false);
       console.log("Login completed.");
-    }
+    };
   };
-  
-  
 
   useEffect(() => {
     const { userId: resultUserId } = loginResultRef.current || {};
@@ -84,8 +83,8 @@ export const LoginForm = ({ match }) => {
   
     if (resultUserId !== undefined) {
       console.log("Redirecting to dashboard...");
-      window.location.href = `/dashboard/${resultUserId}`;
-    }
+      navigate(`/dashboard/${resultUserId}`);
+    }    
   }, []);
   return (
     <Box container maxWidth="xl" className="mb-2 mx-auto gradient-form">
