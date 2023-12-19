@@ -72,13 +72,14 @@ export const LoginForm = ({ match }) => {
 
   useEffect(() => {
     const { userId: resultUserId } = loginResultRef.current || {};
-    
+    console.log("resultUserId:", resultUserId);
+    console.log("loginResultRef.current:", loginResultRef.current);
+
     if (resultUserId !== undefined) {
       console.log("Redirecting to dashboard...");
       navigate(`/dashboard/${resultUserId}`);
     }
-  }, []); 
-
+  }, []);
   return (
     <Box container maxWidth="xl" className="mb-2 mx-auto gradient-form">
       <Box className="row">
