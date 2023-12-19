@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { useMutation, useQueryClient } from "react-query";
 
+
+
+
 const useAuth = () => {
   const queryClient = useQueryClient();
   const [userId, setUserId] = useState(null);
@@ -37,7 +40,7 @@ const useAuth = () => {
 
         console.log("Updated UserId:", newUserId);
 
-        return { data: { userId: newUserId, user: data.user } }; // Update this line
+        return { userId: newUserId, user: data.user };
       } catch (error) {
         console.error("Error during login:", error);
         throw error;
@@ -54,7 +57,4 @@ const useAuth = () => {
   };
 };
 
-
-
 export default useAuth;
-
