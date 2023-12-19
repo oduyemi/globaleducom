@@ -33,10 +33,15 @@ export const Dashboard = ({ auth }) => {
 
   return (
     <div>
-      <h1>Welcome, User {userId}</h1>
+      {userId !== null ? (
+        <h1>Welcome, User {userId}</h1>
+      ) : (
+        <p>Please log in to view this page.</p>
+      )}
     </div>
   );
 };
+
 
 // export const Dashboard = ({ auth }) => {
 //   const { userId } = auth;
