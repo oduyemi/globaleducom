@@ -19,31 +19,20 @@ const useAuth = () => {
           },
           body: JSON.stringify(formData),
         });
-
+  
+        console.log("Full API Response:", response);
+  
         const data = await response.json();
-
+  
         console.log("Login API Response:", data);
-
-        if (data.error) {
-          console.error("Login failed", data.error);
-          throw new Error(data.error.message);
-        }
-
-        const newUserId = data.userId;
-        console.log("New UserId:", newUserId);
-        setUserId(newUserId);
-
-        queryClient.setQueryData('user', data.user);
-
-        console.log("Updated UserId:", newUserId);
-
-        return { userId: newUserId, user: data.user };
+  
+        // ... rest of the code
       } catch (error) {
         console.error("Error during login:", error);
         throw error;
       }
     }
-  );
+  );  
 
   console.log("loginMutation:", loginMutation);
 
